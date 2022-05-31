@@ -1,12 +1,17 @@
 #include <iostream>
-//#include "speicher.h"
 #include "speicher.h"
 #include "gui.h"
+
 //dies ist ein sickes Mühlespiel!!!!!
+using namespace std;
+
+
+
 
 int main ()
 {
-    int a;
+
     printField();
+
     return 0;
 }
