@@ -14,5 +14,5 @@ void checkMill(string);
 //char getStone(string);
 
 char getStone(string coordinate){
-    return 'O';
+    return 'B';
 }

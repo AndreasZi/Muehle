@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include "./speicher.h"
+
 
 void printField(){
     cout << "Mühle:" << endl;
