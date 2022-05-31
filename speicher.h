@@ -1,11 +1,18 @@
 #include <iostream>
+using namespace std;
 
-void deleteStone(String);
 
-void setStone(String);
 
-void moveStone(String);
+void deleteStone(string);
 
-void checkMill(String);
+void setStone(string);
 
-void getStone(String);
+void moveStone(string);
+
+void checkMill(string);
+
+//char getStone(string);
+
+char getStone(string coordinate){
+    return 'O';
+}
