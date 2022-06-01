@@ -53,7 +53,7 @@ void startTurn ()
 int main ()
 {
     resetField();
-    setChip("A0", 'O');
+
     printField();
 
     cout << getChip ("C2");
