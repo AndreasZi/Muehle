@@ -38,9 +38,7 @@ void startTurn (Player &player)
             setChip(position, player.color);
 
             //cout:: //Spielfeld aktualisieren
-            player.unusedChips--;
-
-            cout << "Sie haben noch "<< player.unusedChips << " ungesetzte Steine" << endl;
+            cout << "Sie haben noch "<< --player.unusedChips << " ungesetzte Steine" << endl;
         }
        /* else
         {
