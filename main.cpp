@@ -5,7 +5,7 @@
 //dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
-
+/*
 void startTurn ()
 {
         //Abfrage zu "Beginn" des Spiels: Sind noch Steine zum setzen übrig?
@@ -48,11 +48,15 @@ void startTurn ()
         //umliegende Felder prüfen - ist eine neue Mühle entstanden?
 
 }
+*/
 
 int main ()
 {
-
+    resetField();
+    setChip("A0", 'O');
     printField();
+
+    cout << getChip ("C2");
 
     return 0;
 }
