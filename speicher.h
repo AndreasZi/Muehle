@@ -27,6 +27,7 @@ char getChip(string coordinate){
 
 
 void resetField (){
+    //Feld leeren (mit 'O's füllen)
     string a = "A0";
     while(a[0] != 'D'){
         while(a[1] != '8'){

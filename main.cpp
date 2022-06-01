@@ -1,29 +1,21 @@
 #include <iostream>
 #include "speicher.h"
 #include "gui.h"
+#include "player.h"
 
 //dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
-struct player{
+/* struct player{
     int unusedChips;
     int lostChips;
     char color;
-};
+}; */
 
-/*player black{
-        this->unusedChips = 9
-        this->lostChips = 0
-        this->color = 'B'
-}
 
-player white {
-    int unusedChips = 9;
-    int lostChips = 0;
-    char color = 'W';
-}*/
 
-void startTurn (player player)
+
+void startTurn (Player &player)
 {
         //Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
         if (player.unusedChips > 0)
@@ -43,10 +35,12 @@ void startTurn (player player)
             while (getChip(position) != 'O');
 
             // Stein auf gewählte Position setzen
-            setChip(position, player.color);
+            setChip(position, player.character);
 
-                  //cout:: //Spielfeld aktualisieren
-                  player.unusedChips--;
+            //cout:: //Spielfeld aktualisieren
+            player.unusedChips--;
+
+            cout << "Sie haben noch "<< player.unusedChips << " ungesetzte Steine" << endl;
         }
        /* else
         {
@@ -69,11 +63,18 @@ void startTurn (player player)
 
 int main ()
 {
+    Player pBlack('B');
+    Player pWhite('W');
     resetField();
-
     printField();
 
-    cout << getChip ("C2");
+    while(pWhite.lostChips < 7 && pBlack.lostChips < 7){
+        startTurn(pWhite);
+        printField();
+        startTurn(pBlack);
+        printField(); 
+    }
+    
 
     return 0;
 }
