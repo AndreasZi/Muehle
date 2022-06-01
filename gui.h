@@ -4,17 +4,17 @@ using namespace std;
 
 void printField(){
     cout << "Mühle:" << endl;
-    cout << getStone("A0") << "------------" << getStone("A1") <<"------------"<<getStone("A2")<< endl;
+    cout << getChip("A0") << "------------" << getChip("A1") <<"------------"<<getChip("A2")<< endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
-    cout <<"|    "<< getStone("B0")<< "-------" << getStone("B1") <<"-------"<<getStone("B2")<< "    |"<<endl;
+    cout <<"|    "<< getChip("B0")<< "-------" << getChip("B1") <<"-------"<<getChip("B2")<< "    |"<<endl;
     cout <<"|" <<"    |       " <<"|"<< "       |  "<<"  |"<< endl;
-    cout <<"|    |   "<<getStone("C0")<<"---"<<getStone("C1")<<"---"<<getStone("C2")<<"   |"<<"    |"<<endl;
+    cout <<"|    |   "<<getChip("C0")<<"---"<<getChip("C1")<<"---"<<getChip("C2")<<"   |"<<"    |"<<endl;
     cout <<"|" <<"    |   |       |   |  "<<"  |"<< endl;
-    cout <<getStone("A7")<<"----"<<getStone("B7")<<"---"<<getStone("C7")<<"       "<<getStone("C3")<<"---"<<getStone("B3")<<"----"<<getStone("A3")<<endl;
+    cout <<getChip("A7")<<"----"<<getChip("B7")<<"---"<<getChip("C7")<<"       "<<getChip("C3")<<"---"<<getChip("B3")<<"----"<<getChip("A3")<<endl;
     cout <<"|" <<"    |   |    " <<" "<< "  |   |  "<<"  |"<< endl;
-    cout <<"|    |   "<<getStone("C6")<<"---"<<getStone("C5")<<"---"<<getStone("C4")<<"   |"<<"    |"<<endl;
+    cout <<"|    |   "<<getChip("C6")<<"---"<<getChip("C5")<<"---"<<getChip("C4")<<"   |"<<"    |"<<endl;
     cout <<"|" <<"    |       " <<"|"<< "       |  "<<"  |"<< endl;
-    cout <<"|    "<< getStone("B6")<< "-------" << getStone("B5") <<"-------"<<getStone("B4")<< "    |"<<endl;
+    cout <<"|    "<< getChip("B6")<< "-------" << getChip("B5") <<"-------"<<getChip("B4")<< "    |"<<endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
-    cout << getStone("A6")<< "------------" << getStone("A5") <<"------------"<<getStone("A4")<< endl;
+    cout << getChip("A6")<< "------------" << getChip("A5") <<"------------"<<getChip("A4")<< endl;
     }

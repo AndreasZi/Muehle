@@ -9,23 +9,23 @@ char field[3][8] = {'a'};
 
 
 
-void setStone(string, char);
+void setChip(string, char);
 
-void moveStone(string);
+void moveChip(string);
 
 void checkMill(string); //Überprüfen ob eine Mühle erzeugt wurde
 
-char getStone(string); //Farbe (oder leer) eines Felds erfassen
+char getChip(string); //Farbe (oder leer) eines Felds erfassen
 
 
 
 
 
 
-void setStone(string coordinate, char color){
+void setChip(string coordinate, char color){
     field[int(coordinate[0])-65][coordinate[1]] = color;
 }
 
-char getStone(string coordinate){
+char getChip(string coordinate){
     return field[int(coordinate[0])-65][coordinate[1]];
 }
