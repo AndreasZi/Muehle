@@ -1,17 +1,17 @@
-class Player
+class Player //Erstelle eine Klasse namens Player
 {
 private:
     /* data */
 public:
+
     int unusedChips;
     int lostChips;
-    char character;
-    Player(unsigned char character)
+    char color;
+    Player(char color)
 {
     unusedChips = 9;
     lostChips = 0;
-    character = character;
+    color = color;
 }
-
 
 };

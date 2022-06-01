@@ -35,7 +35,7 @@ void startTurn (Player &player)
             while (getChip(position) != 'O');
 
             // Stein auf gewählte Position setzen
-            setChip(position, player.character);
+            setChip(position, player.color);
 
             //cout:: //Spielfeld aktualisieren
             player.unusedChips--;
@@ -63,8 +63,8 @@ void startTurn (Player &player)
 
 int main ()
 {
-    Player pBlack('B');
-    Player pWhite('W');
+    Player pBlack(65);
+    Player pWhite(87);
     resetField();
     printField();
 
