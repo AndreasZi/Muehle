@@ -1,30 +1,22 @@
 #include <iostream>
 using namespace std;
 
-//map positions;
-char field[3][8];
 
-
-
+char field[3][8]; //Zweidimensionales Array, welches die Werte 'O', 'W' und 'B' speichern soll.
 
 void setChip(string, char);
+char getChip(string);
+void resetField (); 
 
-void moveChip(string);
-
-void checkMill(string); //Überprüfen ob eine Mühle erzeugt wurde
-
-char getChip(string); //Farbe (oder leer) eines Felds erfassen
-
-
-
-void setChip(string coordinate, char color){
-    field[int(coordinate[0])-65][coordinate[1]] = color; //field Array an der Stelle "BuchstabeZahl" den Char color zuweisen
+void setChip(string coordinate, char color){ 
+    //Setter, um den Wert des Arrays field an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
+    field[int(coordinate[0])-65][coordinate[1]] = color; 
 }
 
-char getChip(string coordinate){
+char getChip(string coordinate){ 
+    //Getter, der den Wert des Arrays field an der Stelle coordinate (zb. "A0") zu returnt.
     return field[int(coordinate[0])-65][coordinate[1]];
 }
-
 
 void resetField (){
     //Feld leeren (mit 'O's füllen)
