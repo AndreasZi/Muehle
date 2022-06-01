@@ -2,22 +2,30 @@
 using namespace std;
 
 //map positions;
+char field[3][8] = {'a'};
 
 
-string a = "A";
 
-void deleteStone(string);
 
-void setStone(string);
+
+
+void setStone(string, char);
 
 void moveStone(string);
 
-void checkMill(string);
+void checkMill(string); //Überprüfen ob eine Mühle erzeugt wurde
 
-char getStone(string);
+char getStone(string); //Farbe (oder leer) eines Felds erfassen
 
+
+
+
+
+
+void setStone(string coordinate, char color){
+    field[int(coordinate[0])-65][coordinate[1]] = color;
+}
 
 char getStone(string coordinate){
-
-    return a[0]++;
+    return field[int(coordinate[0])-65][coordinate[1]];
 }
