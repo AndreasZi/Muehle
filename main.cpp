@@ -5,11 +5,28 @@
 //dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
-/*
-void startTurn ()
+struct player{
+    int unusedChips;
+    int lostChips;
+    char color;
+};
+
+/*player black{
+        this->unusedChips = 9
+        this->lostChips = 0
+        this->color = 'B'
+}
+
+player white {
+    int unusedChips = 9;
+    int lostChips = 0;
+    char color = 'W';
+}*/
+
+void startTurn (player player)
 {
-        //Abfrage zu "Beginn" des Spiels: Sind noch Steine zum setzen übrig?
-        if (FrischeSteine > 0)
+        //Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
+        if (player.unusedChips > 0)
         {
             string position;
 
@@ -26,12 +43,12 @@ void startTurn ()
             while (getChip(position) != 'O');
 
             // Stein auf gewählte Position setzen
-            setChip(position, 'B')
+            setChip(position, player.color);
 
-                  cout:: //Spielfeld aktualisieren
-                  FrischeSteine--
+                  //cout:: //Spielfeld aktualisieren
+                  player.unusedChips--;
         }
-        else
+       /* else
         {
             //Stein wählen
             cout << "Bitte wählen Sie eine Position ihres Steins um ihn zu verschieben" << endl;
@@ -43,12 +60,12 @@ void startTurn ()
             //Position frei?
             //Stein verschieben
             //oder nochmal probieren
-        }
+        }*/
 
         //umliegende Felder prüfen - ist eine neue Mühle entstanden?
 
 }
-*/
+
 
 int main ()
 {
