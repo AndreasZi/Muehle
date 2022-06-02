@@ -17,17 +17,27 @@ char getChip(string coordinate){
     //Getter, der den Wert des Arrays field an der Stelle coordinate (zb. "A0") zu returnt.
     return field[int(coordinate[0])-65][coordinate[1]];
 }
-
+//BAUSTELLE WOLFI
 int checkMill(string position){
     int millsFound = 0;
     //Coordinates from A0 to C7
 
-    //Koordinate parsen
+    //parsing coordinates from String to int
     int rotation (position[1]);
-    //Ist Zahl gerade, dann liegt Stein in der Ecke
+    
+    //Checking if stone is placed in corner
     if(rotation%2 == true || rotation == 0){
-            //Von Start in Pos-Richtung prüfen
-            for(int i = rotation; i <= rotation + 2; i++)
+            //from start position checking in positive direction
+            for(int i = rotation; i <= rotation + 2; i++){
+                //Comparing neigbour field to starting field
+                if(getChip(string (position[0] + i)) == getChip(position){
+
+                }
+
+
+            }
+    }else{
+        //This is executed, when stone is not placed in corner
     }
 
 }
