@@ -18,6 +18,19 @@ char getChip(string coordinate){
     return field[int(coordinate[0])-65][coordinate[1]];
 }
 
+int checkMill(string position){
+    int millsFound = 0;
+    //Coordinates from A0 to C7
+
+    //Koordinate parsen
+    int rotation (position[1]);
+    //Ist Zahl gerade, dann liegt Stein in der Ecke
+    if(rotation%2 == true || rotation == 0){
+            //Von Start in Pos-Richtung prüfen
+            for(int i = rotation; i <= rotation + 2; i++)
+    }
+
+}
 void resetField (){
     //Feld leeren (mit 'O's füllen)
     string a = "A0";
