@@ -7,11 +7,11 @@ public:
     int unusedChips;
     int lostChips;
     char color;
-    Player(char color)
+    Player(char COLOR)
 {
     unusedChips = 9;
     lostChips = 0;
-    color = color;
+    color = COLOR;
 }
 
 };

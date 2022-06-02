@@ -17,6 +17,7 @@ using namespace std;
 
 void startTurn (Player &player)
 {
+    cout << "Spieler " << player.color <<" ist am Zug" << endl;
         //Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
         if (player.unusedChips > 0)
         {
@@ -55,14 +56,18 @@ void startTurn (Player &player)
         }*/
 
         //umliegende Felder prüfen - ist eine neue Mühle entstanden?
+    checkMill(position);
 
 }
 
 
 int main ()
 {
-    Player pBlack(65);
-    Player pWhite(87);
+    
+    Player pBlack('B'); //Spieler pWhite ist ein Objekt der Klasse Spieler
+    Player pWhite('W'); //Spieler pBlack ist ein Objekt der Klasse Spieler
+
+   
     resetField();
     printField();
 
@@ -73,6 +78,8 @@ int main ()
         printField(); 
     }
     
+    
+
 
     return 0;
 }
