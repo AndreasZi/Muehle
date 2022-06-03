@@ -19,9 +19,7 @@ void startTurn(Player &player)
     // Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
     if (player.unusedChips > 0)
     {
-
-        do
-        {
+        do{
             // Spieler A soll die Position des Arrays angeben, an dem er den Stein plazieren will
             cout << "Bitte geben Sie die zu belegende Postion an!" << endl;
 
@@ -53,8 +51,6 @@ void startTurn(Player &player)
         }
     }*/
 
-    // umliegende Felder prüfen - ist eine neue Mühle entstanden?
-    // umliegende Felder prüfen - ist eine neue Mühle entstanden?
     cout << checkMill(position) << " <----- checkMill()>" << endl;
 }
 
