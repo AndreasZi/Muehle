@@ -21,40 +21,59 @@ char getChip(string coordinate)
 //------------------------BAUSTELLE WOLFI-------------------------------------(und Andireas)-----------
 int checkMill(string position)
 {
-    // Coordinates from A0 to C7
-    int millsFound = 0;
-    // parsing coordinates
-    char orbit(position[0]);
-    int rotation(position[1]);
+    // Coordinates from A0 to C7/
+ int millsFound = 0;
+    string positionCurrent = position;
+    char orbit = position[0];
+    int rotation = position[1];
+    char chipColor = getChip(position);
+
+    cout << "rotation: " << rotation << endl;
     // Checking if stone is placed in corner
     if (rotation % 2 == true || rotation == 0)
     {
         // from start position checking in positive direction
-        for (int i = rotation; i <= rotation + 2; i++)
+        for (int i = rotation + 1; i < rotation + 2; i++)
         {
             // Comparing neigbour field to starting field
             // Vielleicht geht das parsen hier schief???
-                if(getChip(orbit + string (position[1] + i)) != getChip(position){
-                // Schleife beenden
-                i = rotation + 4;
+                positionCurrent[1] = i;
+                if(getChip(positionCurrent) != chipColor){
+                //if(getChip(orbit + string (position[1] + i)) != getChip(position)
+                
+                // no mill -> ending loop
+                //i = rotation + 4;
+                //goto m_label;
                 }
-                if(i-rotation == 2){
+
+                millsFound = 1;
+                break;
+                /*if(i-rotation == 2){
                 millsFound += 1;
-                }
+                }*/
         }
+                    //wenn for loop erfolgreich durchläuft, ist mühle gefunden
+        // millsFound += 1;   
+        
+       // m_label:
+
+
+        /*
         // from start position checking in negative direction EXCEPTION for A0, B0, C0 required
         for (int i = rotation; i > rotation - 2; i--)
         {
             if (getChip(orbit + string(position[1] - i)) != getChip(position))
             {
+                // no mill -> ending loop
                 i = rotation - 4;
             }
             if (i + rotation == -2)
             {
                 millsFound += 1;
             }
-        }
+        }*/
     }
+     /*
     else
     {
         // This is executed, when stone is not placed in corner
@@ -69,7 +88,8 @@ int checkMill(string position)
         {
             millsFound += 1;
         }
-    }
+    }*/
+    millsFound = 1;
     return millsFound;
 }
 void resetField()

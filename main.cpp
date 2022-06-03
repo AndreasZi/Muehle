@@ -14,11 +14,11 @@ using namespace std;
 
 void startTurn(Player &player)
 {
+    string position;
     cout << "Spieler " << player.color << " ist am Zug" << endl;
     // Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
     if (player.unusedChips > 0)
     {
-        string position;
 
         do
         {
@@ -27,10 +27,7 @@ void startTurn(Player &player)
 
             // worin soll das gespeichert werden?
             cin >> position;
-        }
-
-        // Position abfragen - ist das Feld frei?
-        while (getChip(position) != 'O');
+        } while (getChip(position) != 'O'); // Position abfragen - ist das Feld frei?
 
         // Stein auf gewählte Position setzen
         setChip(position, player.color);
@@ -38,11 +35,14 @@ void startTurn(Player &player)
         // cout:: //Spielfeld aktualisieren
         cout << "Sie haben noch " << --player.unusedChips << " ungesetzte Steine" << endl;
     }
-    else
+    /*else
     {
         // Stein wählen
         cout << "Bitte wählen Sie eine Position ihres Steins um ihn zu verschieben" << endl;
         cin >> // Arrayposition eingeben
+
+        if(player.color == getChip(position)){
+
             // neue Position wählen
             cout << "Bitte wählen Sie eine Position ihres Steins um ihn zu verschieben" << endl;
         cin >> // Neue Position angeben
@@ -50,13 +50,17 @@ void startTurn(Player &player)
         // Position frei?
         // Stein verschieben
         // oder nochmal probieren
-    }
+        }
+    }*/
 
     // umliegende Felder prüfen - ist eine neue Mühle entstanden?
-    checkMill(position);
+    // umliegende Felder prüfen - ist eine neue Mühle entstanden?
+    cout << "Wir haben " << checkMill(position) << " Mühlen gefunden, yaaaay" << endl;
+    cout << "COUT FUNKTIONIERT DIGGA WAS LOOS?" << endl;
 }
 
-int main(){
+int main()
+{
 
     Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
     Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
