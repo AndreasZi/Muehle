@@ -25,32 +25,27 @@ int checkMill(string position)
  int millsFound = 0;
     string positionCurrent = position;
     char orbit = position[0];
-    int rotation = position[1];
+    char rotation = position[1];
     char chipColor = getChip(position);
 
-    cout << "rotation: " << rotation << endl;
+    //cout << "rotation: " << rotation << endl;
     // Checking if stone is placed in corner
-    if (rotation % 2 == true || rotation == 0)
+    if (int(rotation) % 2 == 0 || rotation == '0')
     {
         // from start position checking in positive direction
-        for (int i = rotation + 1; i < rotation + 2; i++)
+        for (int i = 1; i <= 2; i++)
         {
             // Comparing neigbour field to starting field
             // Vielleicht geht das parsen hier schief???
-                positionCurrent[1] = i;
+                positionCurrent[1] = rotation + i;
                 if(getChip(positionCurrent) != chipColor){
-                //if(getChip(orbit + string (position[1] + i)) != getChip(position)
-                
-                // no mill -> ending loop
-                //i = rotation + 4;
-                //goto m_label;
+                    break;
+                    // no mill -> ending loop
                 }
 
-                millsFound = 1;
-                break;
-                /*if(i-rotation == 2){
-                millsFound += 1;
-                }*/
+                if(i == 2){
+                millsFound ++;
+                }
         }
                     //wenn for loop erfolgreich durchläuft, ist mühle gefunden
         // millsFound += 1;   
@@ -89,7 +84,6 @@ int checkMill(string position)
             millsFound += 1;
         }
     }*/
-    millsFound = 1;
     return millsFound;
 }
 void resetField()

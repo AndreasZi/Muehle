@@ -55,8 +55,7 @@ void startTurn(Player &player)
 
     // umliegende Felder prüfen - ist eine neue Mühle entstanden?
     // umliegende Felder prüfen - ist eine neue Mühle entstanden?
-    cout << "Wir haben " << checkMill(position) << " Mühlen gefunden, yaaaay" << endl;
-    cout << "COUT FUNKTIONIERT DIGGA WAS LOOS?" << endl;
+    cout << checkMill(position) << " <----- checkMill()>" << endl;
 }
 
 int main()
