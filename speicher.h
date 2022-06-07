@@ -30,10 +30,6 @@ char getChip(string coordinate)
     // Getter, der den Wert des Arrays field an der Stelle coordinate (zb. "A0") zu returnt.
     return field[int(coordinate[0]) - 65][coordinate[1]];
 }
-
-
-
-
 int checkMill(string position)
 {
     // Coordinates from A0 to C7/
@@ -44,8 +40,8 @@ int checkMill(string position)
     cout << "getChip(position) = " << getChip(position) << endl;
     cout << "getChip(position[0], int(position[1]) + 1) = " << getChip(position[0], int(position[1]) + 1) << endl;
     cout << "getChip(position[0], int(position[1]) + 2) = " << getChip(position[0], int(position[1]) + 2) << endl;
-    //cout << "getChip(position[0], 0) = " << getChip(position[0], 0) << endl;
-    //cout << "position[1] = " << position[1] << endl;
+    // cout << "getChip(position[0], 0) = " << getChip(position[0], 0) << endl;
+    // cout << "position[1] = " << position[1] << endl;
 
     if (int(position[1]) % 2 == 0 || position[1] == '0')
     {
@@ -62,7 +58,7 @@ int checkMill(string position)
         {
             millsFound++;
         }
-        else if (getChip(position) == getChip(position[0],  int(position[1]) - 1) && getChip(position) == getChip(position[0],  int(position[1]) - 2))
+        else if (getChip(position) == getChip(position[0], int(position[1]) - 1) && getChip(position) == getChip(position[0], int(position[1]) - 2))
         {
             millsFound++;
         }
@@ -72,16 +68,40 @@ int checkMill(string position)
         // This is executed, when stone is not placed in corner
 
         // checking for radial mill
-        if(getChip(position) == getChip('A', position[1]) && getChip(position) == getChip('B', position[1]) && getChip(position) == getChip('C', position[1])){
+        if (getChip(position) == getChip('A', position[1]) && getChip(position) == getChip('B', position[1]) && getChip(position) == getChip('C', position[1]))
+        {
             millsFound++;
         }
         // checking for tangential mill
-        if(getChip(position) == getChip(position[0], int(position[1]) - 1) && getChip(position) == getChip(position[0], int(position[1]) + 1))
+        if (getChip(position) == getChip(position[0], int(position[1]) - 1) && getChip(position) == getChip(position[0], int(position[1]) + 1))
         {
             millsFound++;
         }
     }
     return millsFound;
+}
+bool checkNeighbour(string originPosition, string targetPosition)
+{
+    // Prüfen, ob zwei Positionen benachbart sind
+    //  A == A?
+    if (originPosition[0] == targetPosition[0])
+    {
+        // AX-AY ==1 DISTANZ
+        if (originPosition[1] - targetPosition[1] == 1 || targetPosition[1] - originPosition[1] == 1)
+        {
+            return true;
+            break;
+        }
+    }else if(originPosition[1] == targetPosition[1]){
+        //AB OR BC
+        if(originPosition[0] == 'A' && targetPosition[0] == 'B'){
+            return true;
+        }else if(originPosition[0] == 'B' && targetPosition[0] == 'C'){
+            return true;
+        }else if(originPosition[0] == 'C' && targetPosition[0] == 'B'){
+            return true;
+        }
+    }
 }
 /*
 int removeChip(char activePlayer, string position)
