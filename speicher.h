@@ -36,13 +36,6 @@ int checkMill(string position)
     int millsFound = 0;
 
     //  Checking if stone is placed in corner
-    cout << "Modolo-Prüfung = " << int(position[1]) % 2 << endl;
-    cout << "getChip(position) = " << getChip(position) << endl;
-    cout << "getChip(position[0], int(position[1]) + 1) = " << getChip(position[0], int(position[1]) + 1) << endl;
-    cout << "getChip(position[0], int(position[1]) + 2) = " << getChip(position[0], int(position[1]) + 2) << endl;
-    // cout << "getChip(position[0], 0) = " << getChip(position[0], 0) << endl;
-    // cout << "position[1] = " << position[1] << endl;
-
     if (int(position[1]) % 2 == 0 || position[1] == '0')
     {
         if (position[1] == '6' && getChip(position) == getChip(position[0], 7 + 48) && getChip(position) == getChip(position[0], 0 + 48))
@@ -82,38 +75,48 @@ int checkMill(string position)
 }
 bool checkNeighbour(string originPosition, string targetPosition)
 {
-    // Prüfen, ob zwei Positionen benachbart sind
-    //  A == A?
+    // Checking for same orbit (A == A?)
     if (originPosition[0] == targetPosition[0])
     {
         // AX-AY ==1 DISTANZ
         if (originPosition[1] - targetPosition[1] == 1 || targetPosition[1] - originPosition[1] == 1)
         {
             return true;
-            break;
-        //EXCEPTION FOR X0 & X7
-        }else if(originPosition[1] == 0 && targetPosition[1] == 7 || originPosition[1] == 7 && targetPosition[1] == 0){
+            // EXCEPTION FOR X0 & X7
+        }
+        else if (originPosition[1] == 0 && targetPosition[1] == 7 || originPosition[1] == 7 && targetPosition[1] == 0)
+        {
             return true;
-            break;
-        } 
-    }else if(originPosition[1] == targetPosition[1]){
-        //AB BC BA CB
-        if(originPosition[0] == 'A' && targetPosition[0] == 'B'){
+        }
+    }
+    else if (originPosition[1] == targetPosition[1])
+    {
+        // Cases: AB BC  BA CB
+        if (originPosition[0] == 'A' && targetPosition[0] == 'B')
+        {
             return true;
-        }else if(originPosition[0] == 'B' && targetPosition[0] == 'C'){
+        }
+        else if (originPosition[0] == 'B' && targetPosition[0] == 'C')
+        {
             return true;
-        }else if(originPosition[0] == 'C' && targetPosition[0] == 'B'){
+        }
+        else if (originPosition[0] == 'C' && targetPosition[0] == 'B')
+        {
             return true;
-        }else if(originPosition[0 == 'B' && targetPosition[0] == 'A']){
+        }
+        else if (originPosition[0 == 'B' && targetPosition[0] == 'A'])
+        {
             return true;
-        }else{
+        }
+        else
+        {
             return false;
         }
     }
 }
-/*
 int removeChip(char activePlayer, string position)
 {
+    //!!!Fehlerfall muss beim Funktionsaufruf berücksichtigt werden und kann nicht von removeChip() gehandelt werden!!!
     if (activePlayer != getChip(position))
     {
         setChip(position, O);
@@ -121,29 +124,28 @@ int removeChip(char activePlayer, string position)
         if (activePlayer == 'W')
         {
             pBlack.lostChips++;
+            cout << "Ein schwarzer Stein wurde von " << position << " entfernt." << endl;
             return 1;
-            break;
         }
         else
         {
             pWhite.lostChips++;
+            cout << "Ein weißer Stein wurde von " << position << " entfernt." << endl;
             return 1;
-            break;
         }
-    } // FEHLERFALL
+    }
+    // FEHLERFALL
     else if (getChip(position) == 'O')
     {
         cout << "Das Feld ist leer, bitte wähle ein anderes Feld." << endl;
         return 0;
-        break;
     }
     else
     {
         cout << "Auf dem Feld steht dein eigener Stein, bitte wähle ein anderes Feld." << endl;
         return 0;
-        break;
     }
-}*/
+}
 void resetField()
 {
     // Feld leeren (mit 'O's füllen)
