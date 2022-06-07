@@ -14,44 +14,64 @@ using namespace std;
 
 void startTurn(Player &player)
 {
-    string position;
+    string targetPosition;
     cout << "Spieler " << player.color << " ist am Zug" << endl;
     // Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
     if (player.unusedChips > 0)
     {
         do{
+
             // Spieler A soll die Position des Arrays angeben, an dem er den Stein plazieren will
             cout << "Bitte geben Sie die zu belegende Postion an!" << endl;
+            cin >> targetPosition;
 
-            // worin soll das gespeichert werden?
-            cin >> position;
-        } while (getChip(position) != 'O'); // Position abfragen - ist das Feld frei?
+        } while (getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
 
         // Stein auf gewählte Position setzen
-        setChip(position, player.color);
+        setChip(targetPosition, player.color);
 
         // cout:: //Spielfeld aktualisieren
         cout << "Sie haben noch " << --player.unusedChips << " ungesetzte Steine" << endl;
     }
-    /*else
+    else // Einen Stein vom aktuellen Spieler verschieben
     {
-        // Stein wählen
-        cout << "Bitte wählen Sie eine Position ihres Steins um ihn zu verschieben" << endl;
-        cin >> // Arrayposition eingeben
+        string originPosition;
 
-        if(player.color == getChip(position)){
+        do {
+            //cin Ursprungsposition
+            //cin Zielposition
+            //Springen nicht erlaubt?
+            //Nachbarfeld?
+            //Feld frei?
 
-            // neue Position wählen
-            cout << "Bitte wählen Sie eine Position ihres Steins um ihn zu verschieben" << endl;
-        cin >> // Neue Position angeben
-        // Distanz prüfen (gültig nur wenn ToteSteine >= 6?)
-        // Position frei?
-        // Stein verschieben
+            // Welcher Stein soll verschoben werden?
+            cout << "Bitte wählen Sie eine Position ihres Steins, um ihn zu verschieben" << endl;
+            cin >> originPosition;
+
+            // Wohin soll der Stein verschoben werden?
+            cout << "Bitte wählen Sie die Position, an die der Stein verschoben werden soll" << endl;
+            cin >> targetPosition;//(getChip(targetPosition) == 'O')
+
+            if (checkNeighbour(originPosition, targetPosition) == false && (player.lostChips > 6))
+                continue; //Felder sind nicht benachbart und Springen ist noch nicht erlaubt
+
+            //Mühleabfrage
+
+        } while (getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
         // oder nochmal probieren
-        }
-    }*/
+        //Bedingung?
+        //nach while: Zielposition besetzen?
 
-    cout << checkMill(position) << " <----- checkMill()>" << endl;
+        //Ursprungsposition zurücksetzen -> 'O'
+        setChip(originPosition, 'O');
+
+        // Stein auf gewählte Position setzen
+        setChip(targetPosition, player.color);
+
+    }
+    if (checkMill(targetPosition)  ){
+
+    }
 }
 
 int main()
