@@ -67,23 +67,23 @@ int checkMill(string position)
             millsFound++;
         }
     }
-    /* else
+    else
     {
         // This is executed, when stone is not placed in corner
 
         // checking for radial mill
-        if (getChip(position) == getChip(string({'A' + position[1]})) == getChip(string({'B' + position[1]})) == getChip(string({'A' + position[1]})))
-        {
-            millsFound += 1;
+        if(getChip(position) == getChip('A', position[1]) && getChip(position) == getChip('B', position[1]) && getChip(position) == getChip('C', position[1])){
+            millsFound++;
         }
         // checking for tangential mill
-        if (getChip(position) == getChip(orbit + rotation - 1) == getChip(orbit + rotation + 1))
+        if(getChip(position) == getChip(position[0], int(position[1]) - 1) && getChip(position) == getChip(position[0], int(position[1]) + 1))
         {
-            millsFound += 1;
+            millsFound++;
         }
-    } */
+    }
     return millsFound;
 }
+/*
 int removeChip(char activePlayer, string position)
 {
     if (activePlayer != getChip(position))
@@ -115,7 +115,7 @@ int removeChip(char activePlayer, string position)
         return 0;
         break;
     }
-}
+}*/
 void resetField()
 {
     // Feld leeren (mit 'O's füllen)
