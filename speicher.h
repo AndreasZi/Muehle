@@ -93,13 +93,17 @@ bool checkNeighbour(string originPosition, string targetPosition)
             break;
         }
     }else if(originPosition[1] == targetPosition[1]){
-        //AB OR BC
+        //AB BC BA CB
         if(originPosition[0] == 'A' && targetPosition[0] == 'B'){
             return true;
         }else if(originPosition[0] == 'B' && targetPosition[0] == 'C'){
             return true;
         }else if(originPosition[0] == 'C' && targetPosition[0] == 'B'){
             return true;
+        }else if(originPosition[0 == 'B' && targetPosition[0] == 'A']){
+            return true;
+        }else{
+            return false;
         }
     }
 }
