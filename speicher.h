@@ -84,6 +84,38 @@ int checkMill(string position)
     } */
     return millsFound;
 }
+int removeChip(char activePlayer, string position)
+{
+    if (activePlayer != getChip(position))
+    {
+        setChip(position, O);
+
+        if (activePlayer == 'W')
+        {
+            pBlack.lostChips++;
+            return 1;
+            break;
+        }
+        else
+        {
+            pWhite.lostChips++;
+            return 1;
+            break;
+        }
+    } // FEHLERFALL
+    else if (getChip(position) == 'O')
+    {
+        cout << "Das Feld ist leer, bitte wähle ein anderes Feld." << endl;
+        return 0;
+        break;
+    }
+    else
+    {
+        cout << "Auf dem Feld steht dein eigener Stein, bitte wähle ein anderes Feld." << endl;
+        return 0;
+        break;
+    }
+}
 void resetField()
 {
     // Feld leeren (mit 'O's füllen)
