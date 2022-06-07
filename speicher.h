@@ -91,7 +91,11 @@ bool checkNeighbour(string originPosition, string targetPosition)
         {
             return true;
             break;
-        }
+        //EXCEPTION FOR X0 & X7
+        }else if(originPosition[1] == 0 && targetPosition[1] == 7 || originPosition[1] == 7 && targetPosition[1] == 0){
+            return true;
+            break;
+        } 
     }else if(originPosition[1] == targetPosition[1]){
         //AB BC BA CB
         if(originPosition[0] == 'A' && targetPosition[0] == 'B'){
