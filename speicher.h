@@ -25,8 +25,9 @@ int checkMill(string position)
     int millsFound = 0;
 
     //  Checking if stone is placed in corner
-    cout << int(position[1]) % 2 << endl;
-    if (int(position[1]) % 2 == 0 /* || position[1] == '0' */)
+    cout << "Modolo-Prüfung = " << int(position[1]) % 2 << endl;
+
+    if (int(position[1]) % 2 == 0 || position[1] == '0')
     {
         if (position[1] == '6' && getChip(position) == getChip(string({position[0], '7'})) == getChip(string({position[0], '0'})))
         {
@@ -45,22 +46,21 @@ int checkMill(string position)
         {
             millsFound++;
         }
+    }
+    else
+    {
+        // This is executed, when stone is not placed in corner
 
-        /*
-       else
-       {
-           // This is executed, when stone is not placed in corner
-
-           // checking for radial mill
-           if (getChip(position) == getChip('A' + position(1)) == getChip('B' + position(1)) == getChip('C' + position(1)))
-           {
-               millsFound += 1;
-           }
-           // checking for tangential mill
-           if (getChip(position) == getChip(orbit + rotation - 1) == getChip(orbit + rotation + 1))
-           {
-               millsFound += 1;
-           }*/
+        // checking for radial mill
+        if (getChip(position) == getChip('A' + position(1)) == getChip('B' + position(1)) == getChip('C' + position(1)))
+        {
+            millsFound += 1;
+        }
+        // checking for tangential mill
+        if (getChip(position) == getChip(orbit + rotation - 1) == getChip(orbit + rotation + 1))
+        {
+            millsFound += 1;
+        }
     }
     return millsFound;
 }
