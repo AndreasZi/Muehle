@@ -2,19 +2,19 @@
 using namespace std;
 
 
-void printField(){
-    cout << "Mühle:" << endl;
-    cout << getChip("A0") << "------------" << getChip("A1") <<"------------"<<getChip("A2")<< endl;
+void printField(Field f){
+    /* cout << "Mühle:" << endl;
+    cout << f.getChip("A0") << "------------" << f.getChip("A1") <<"------------"<<f.getChip("A2")<< endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
-    cout <<"|    "<< getChip("B0")<< "-------" << getChip("B1") <<"-------"<<getChip("B2")<< "    |"<<endl;
+    cout <<"|    "<< f.getChip("B0")<< "-------" << f.getChip("B1") <<"-------"<<f.getChip("B2")<< "    |"<<endl;
     cout <<"|" <<"    |       " <<"|"<< "       |  "<<"  |"<< endl;
-    cout <<"|    |   "<<getChip("C0")<<"---"<<getChip("C1")<<"---"<<getChip("C2")<<"   |"<<"    |"<<endl;
+    cout <<"|    |   "<<f.getChip("C0")<<"---"<<f.getChip("C1")<<"---"<<f.getChip("C2")<<"   |"<<"    |"<<endl;
     cout <<"|" <<"    |   |       |   |  "<<"  |"<< endl;
-    cout <<getChip("A7")<<"----"<<getChip("B7")<<"---"<<getChip("C7")<<"       "<<getChip("C3")<<"---"<<getChip("B3")<<"----"<<getChip("A3")<<endl;
+    cout <<f.getChip("A7")<<"----"<<f.getChip("B7")<<"---"<<f.getChip("C7")<<"       "<<f.getChip("C3")<<"---"<<f.getChip("B3")<<"----"<<f.getChip("A3")<<endl;
     cout <<"|" <<"    |   |    " <<" "<< "  |   |  "<<"  |"<< endl;
-    cout <<"|    |   "<<getChip("C6")<<"---"<<getChip("C5")<<"---"<<getChip("C4")<<"   |"<<"    |"<<endl;
+    cout <<"|    |   "<<f.getChip("C6")<<"---"<<f.getChip("C5")<<"---"<<f.getChip("C4")<<"   |"<<"    |"<<endl;
     cout <<"|" <<"    |       " <<"|"<< "       |  "<<"  |"<< endl;
-    cout <<"|    "<< getChip("B6")<< "-------" << getChip("B5") <<"-------"<<getChip("B4")<< "    |"<<endl;
+    cout <<"|    "<< f.getChip("B6")<< "-------" << f.getChip("B5") <<"-------"<<f.getChip("B4")<< "    |"<<endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
-    cout << getChip("A6")<< "------------" << getChip("A5") <<"------------"<<getChip("A4")<< endl;
+    cout << f.getChip("A6")<< "------------" << f.getChip("A5") <<"------------"<<f.getChip("A4")<< endl; */
     }
