@@ -6,11 +6,16 @@
 // dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
-/* struct player{
-    int unusedChips;
-    int lostChips;
-    char color;
-}; */
+Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
+Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
+
+
+Player* getOpponent(Player player){
+    if(player.color == 'W')
+        return &pBlack;
+    if(player.color == 'B')
+        return &pWhite;
+}
 
 void startTurn(Player &player)
 {
@@ -70,15 +75,30 @@ void startTurn(Player &player)
 
     }
     if (checkMill(targetPosition)  ){
+        string targetPosition;
+        
+        do{
+        cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
+        cin >> targetPosition;
 
+        }while(getChip(targetPosition) != player.color && getChip(targetPosition) != 'O'){
+            cout << "Auf dem gewählten Feld befindet sich kein gegnerischer Chip" <<endl;
+        }
+        
+        //Chip entfernen
+        setChip(targetPosition, 'O');
+        *getOpponent(player)
+        //Stein entfernen
+
+
+        //lostChips 
     }
 }
 
 int main()
 {
 
-    Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
-    Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
+    
 
     resetField();
     printField();
