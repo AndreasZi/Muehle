@@ -114,12 +114,12 @@ bool checkNeighbour(string originPosition, string targetPosition)
         }
     }
 }
-int removeChip(char activePlayer, string position)
+/* int removeChip(char activePlayer, string position)
 {
     //!!!Fehlerfall muss beim Funktionsaufruf berücksichtigt werden und kann nicht von removeChip() gehandelt werden!!!
     if (activePlayer != getChip(position))
     {
-        setChip(position, O);
+        setChip(position, 'O');
 
         if (activePlayer == 'W')
         {
@@ -145,7 +145,7 @@ int removeChip(char activePlayer, string position)
         cout << "Auf dem Feld steht dein eigener Stein, bitte wähle ein anderes Feld." << endl;
         return 0;
     }
-}
+} */
 void resetField()
 {
     // Feld leeren (mit 'O's füllen)

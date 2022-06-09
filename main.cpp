@@ -6,16 +6,8 @@
 // dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
-Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
-Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
 
 
-Player* getOpponent(Player player){
-    if(player.color == 'W')
-        return &pBlack;
-    if(player.color == 'B')
-        return &pWhite;
-}
 
 void startTurn(Player &player)
 {
@@ -74,9 +66,8 @@ void startTurn(Player &player)
         setChip(targetPosition, player.color);
 
     }
-    if (checkMill(targetPosition)  ){
+    /* if (checkMill(targetPosition)  ){
         string targetPosition;
-        
         do{
         cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
         cin >> targetPosition;
@@ -86,19 +77,20 @@ void startTurn(Player &player)
         }
         
         //Chip entfernen
-        setChip(targetPosition, 'O');
-        *getOpponent(player)
+        setChip(targetPosition, 'O')
+        
         //Stein entfernen
 
 
         //lostChips 
-    }
+    } */
 }
 
 int main()
 {
 
-    
+    Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
+    Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
 
     resetField();
     printField();
