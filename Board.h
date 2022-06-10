@@ -156,10 +156,8 @@ bool Board::checkNeighbour(string originPosition, string targetPosition)
             return false;
         }
     }
-    else
-    {
-        return false;
-    }
+    return false;
+    
 }
 /* int removeChip(char activePlayer, string position)
 {

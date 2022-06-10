@@ -91,19 +91,15 @@ void startTurn(Player &player)
 
     }
     if (b.checkMill(targetPosition)  ){
-        string targetPosition;
         do{
         cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
         cin >> targetPosition;
 
         }while(b.getChip(targetPosition) == player.color || b.getChip(targetPosition) == 'O');
+        //Gewähltes Feld ist kein gegnerchip
         
         //Chip entfernen
         b.setChip(targetPosition, 'O');
-        
-        //Stein entfernen
-
-
-        //lostChips 
+        //opponent lostChips ++
     }
 }
