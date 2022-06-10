@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Board.cpp"
-#include "gui.h"
+//#include "gui.h"
 #include "player.h"
 
 // dies ist ein sickes Mühlespiel!!!!!

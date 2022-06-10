@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 class Player // Erstelle eine Klasse namens Player
 {
 private:
@@ -9,6 +12,7 @@ public:
     int lostChips;
     char color;
     Player(char);
+    Player(string, char);
 
     void startTurn();
     void loseChip();
@@ -17,8 +21,6 @@ public:
     void setName(string);
     string getName();
 };
-#include <iostream>
-using namespace std;
 
 Player::Player(char COLOR)
 {
@@ -27,7 +29,7 @@ Player::Player(char COLOR)
     color = COLOR;
     // name = generateName();
 }
-Player::Player(string NAME; char COLOR)
+Player::Player(string NAME, char COLOR)
 {
     unusedChips = 9;
     lostChips = 0;
@@ -53,29 +55,41 @@ private:
     // ARRAY der Nachbarn | 24 ChipPlacements with max. 4 Neighbours
     string neighbours[24][4];
 
-    void fillGMarray();
-    void fillNeigbourArray();
-
+   
 public:
-    Bot();
+    // Bot();
+    // Bot(char);
     //~Bot();
+    void fillGMarray(void);
+    void fillNeighbourArray(void);
+
 
     void placeChip();
     void moveChip();
     string getRemoveChipPosition();
+
+    Bot(char COLOR) : Player(COLOR)
+    {
+        // unusedChips = 9;
+        // lostChips = 0;
+        // color = COLOR;
+        setName("Bot");
+        fillGMarray();
+        fillNeighbourArray();
+    }
 };
 
-Bot::Bot(char COLOR)
+/*Bot :: Bot(char COLOR):Player(COLOR)
 {
-    unusedChips = 9;
-    lostChips = 0;
-    color = COLOR;
-    name = 'Bot';
+    //unusedChips = 9;
+    //lostChips = 0;
+    //color = COLOR;
+    setName("Bot");
     fillGMarray();
     fillNeighbourArray();
-}
+}*/
 
-Bot::Bot()
+/*Bot::Bot()
 {
     unusedChips = 9;
     lostChips = 0;
@@ -83,21 +97,22 @@ Bot::Bot()
     name = 'Bot';
     fillGMarray();
     fillNeighbourArray();
-}
+}*/
 
 /*Bot::~Bot(){
 
 }*/
 
+void Player::setName(string NAME)
+{
+    name = NAME;
+}
 // AB HIER KOMMT ALLES IN Bot.cpp---------------------------------------------------------------------------------------
 
-#include <iostream>
-using namespace std;
-
-fillGMarray()
+void fillGMarray()
 {
 }
-fillNeighbourArray()
+void fillNeighbourArray()
 {
 }
 
