@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Board.cpp"
 //#include "gui.h"
-#include "player.h"
+#include "Player.cpp"
+
 
 // dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
