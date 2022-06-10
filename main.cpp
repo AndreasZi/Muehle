@@ -1,11 +1,35 @@
 #include <iostream>
-#include "speicher.h"
+#include "Board.h"
 #include "gui.h"
 #include "player.h"
 
 // dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
+
+
+Board b;
+void startTurn(Player&);
+
+int main()
+{
+    
+    Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
+    Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
+    
+
+    b.printBoard();
+
+    while (pWhite.lostChips < 7 && pBlack.lostChips < 7)
+    {
+        startTurn(pWhite);
+        b.printBoard();
+        startTurn(pBlack);
+        b.printBoard();
+    }
+
+    return 0;
+}
 
 
 
@@ -22,10 +46,10 @@ void startTurn(Player &player)
             cout << "Bitte geben Sie die zu belegende Postion an!" << endl;
             cin >> targetPosition;
 
-        } while (getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
+        } while (b.getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
 
         // Stein auf gewählte Position setzen
-        setChip(targetPosition, player.color);
+        b.setChip(targetPosition, player.color);
 
         // cout:: //Spielfeld aktualisieren
         cout << "Sie haben noch " << --player.unusedChips << " ungesetzte Steine" << endl;
@@ -49,59 +73,37 @@ void startTurn(Player &player)
             cout << "Bitte wählen Sie die Position, an die der Stein verschoben werden soll" << endl;
             cin >> targetPosition;//(getChip(targetPosition) == 'O')
 
-            if (checkNeighbour(originPosition, targetPosition) == false && (player.lostChips > 6))
+            if (b.checkNeighbour(originPosition, targetPosition) == false && (player.lostChips > 6))
                 continue; //Felder sind nicht benachbart und Springen ist noch nicht erlaubt
 
             //Mühleabfrage
 
-        } while (getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
+        } while (b.getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
         // oder nochmal probieren
         //Bedingung?
         //nach while: Zielposition besetzen?
 
         //Ursprungsposition zurücksetzen -> 'O'
-        setChip(originPosition, 'O');
+        b.setChip(originPosition, 'O');
 
         // Stein auf gewählte Position setzen
-        setChip(targetPosition, player.color);
+        b.setChip(targetPosition, player.color);
 
     }
-    /* if (checkMill(targetPosition)  ){
+    if (b.checkMill(targetPosition)  ){
         string targetPosition;
         do{
         cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
         cin >> targetPosition;
 
-        }while(getChip(targetPosition) != player.color && getChip(targetPosition) != 'O'){
-            cout << "Auf dem gewählten Feld befindet sich kein gegnerischer Chip" <<endl;
-        }
+        }while(b.getChip(targetPosition) == player.color || b.getChip(targetPosition) == 'O');
         
         //Chip entfernen
-        setChip(targetPosition, 'O')
+        b.setChip(targetPosition, 'O');
         
         //Stein entfernen
 
 
         //lostChips 
-    } */
-}
-
-int main()
-{
-
-    Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
-    Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
-
-    resetField();
-    printField();
-
-    while (pWhite.lostChips < 7 && pBlack.lostChips < 7)
-    {
-        startTurn(pWhite);
-        printField();
-        startTurn(pBlack);
-        printField();
     }
-
-    return 0;
 }
