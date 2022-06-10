@@ -5,7 +5,6 @@ Player::Player(char COLOR)
     unusedChips = 9;
     lostChips = 0;
     color = COLOR;
-    // name = generateName();
 }
 Player::Player(string NAME, char COLOR)
 {
@@ -14,11 +13,9 @@ Player::Player(string NAME, char COLOR)
     color = COLOR;
     setName(NAME);
 }
-
 void Player::startTurn()
 {
 }
-
 void Player::loseChip()
 {
 }
@@ -27,7 +24,7 @@ void Player::setName(string NAME)
     name = NAME;
 }
 
-
+//THIS IS WHERE BOT-TERRITORY STARTS---------------------------------------------------------------------------------------
 
 void Bot::fillGMarray()
 {

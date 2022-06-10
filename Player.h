@@ -1,10 +1,8 @@
 #include <iostream>
 using namespace std;
-
-class Player // Erstelle eine Klasse namens Player
+class Player
 {
 private:
-    /* data */
     string name;
 
 public:
@@ -25,17 +23,10 @@ public:
 class Bot : public Player
 {
 private:
-    // char generateColor(); //Immer anders als Spieler
-
-    // ARRAY der globalen Mühlen | 16 Mühlen a 3 Chips
     string globalMills[16][3];
-    // ARRAY der Nachbarn | 24 ChipPlacements with max. 4 Neighbours
     string neighbours[24][4];
 
 public:
-    // Bot();
-    // Bot(char);
-    //~Bot();
     void fillGMarray(void);
     void fillNeighbourArray(void);
 
@@ -45,35 +36,8 @@ public:
 
     Bot(char COLOR) : Player(COLOR)
     {
-        // unusedChips = 9;
-        // lostChips = 0;
-        // color = COLOR;
         setName("Bot");
         fillGMarray();
         fillNeighbourArray();
     }
 };
-
-/*Bot :: Bot(char COLOR):Player(COLOR)
-{
-    //unusedChips = 9;
-    //lostChips = 0;
-    //color = COLOR;
-    setName("Bot");
-    fillGMarray();
-    fillNeighbourArray();
-}*/
-
-/*Bot::Bot()
-{
-    unusedChips = 9;
-    lostChips = 0;
-    // color = generateColor();
-    name = 'Bot';
-    fillGMarray();
-    fillNeighbourArray();
-}*/
-
-/*Bot::~Bot(){
-
-}*/
