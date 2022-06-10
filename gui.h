@@ -2,7 +2,7 @@
 using namespace std;
 
 
-void printField(){
+/* void printField(){
     cout << "Mühle:" << endl;
     cout << getChip("A0") << "------------" << getChip("A1") <<"------------"<<getChip("A2")<< endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
@@ -17,4 +17,4 @@ void printField(){
     cout <<"|    "<< getChip("B6")<< "-------" << getChip("B5") <<"-------"<<getChip("B4")<< "    |"<<endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
     cout << getChip("A6")<< "------------" << getChip("A5") <<"------------"<<getChip("A4")<< endl;
-    }
+    } */
