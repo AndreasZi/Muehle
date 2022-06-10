@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Board.h"
+#include "Board.cpp"
 #include "gui.h"
 #include "player.h"
 
