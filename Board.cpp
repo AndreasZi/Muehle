@@ -2,186 +2,140 @@
 
 Board::Board(/* args */)
 {
+    
+    //*cells = ;
     emptyBoard();
 }
 
-Board::~Board()
-{
-}
 
 
-void Board::setChip(string coordinate, char color)
+
+
+void Board::setChip(char orbit, char rotation, char color)
 {
-    // Setter, um den Wert des Arrays cellPositions an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
-    cellPositions[int(coordinate[0]) - 65][coordinate[1]] = color;
+    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
+    cells[orbit][rotation] = color;
 }
 
-char Board::getChip(char orbit, int rotation)
-{
-    // Getter, der den Wert des Arrays cellPositions an der Stelle coordinate (zb. "A0") zu returnt.
-    return cellPositions[int(orbit) - 65][rotation];
-}
 
 char Board::getChip(char orbit, char rotation)
 {
-    // Getter, der den Wert des Arrays cellPositions an der Stelle coordinate (zb. "A0") zu returnt.
-    return cellPositions[int(orbit) - 65][rotation];
-}
-
-char Board::getChip(string coordinate)
-{
-    // Getter, der den Wert des Arrays cellPositions an der Stelle coordinate (zb. "A0") zu returnt.
-    return cellPositions[int(coordinate[0]) - 65][coordinate[1]];
+    // Getter, der den Wert des Arrays cells an der Stelle coordinate (zb. "A0") zu returnt.
+    return cells[orbit][rotation];
 }
 
 void Board::emptyBoard()
 {   
-    // Feld leeren (mit 'O's füllen)
-    string a = "A0";
-    while (a[0] != 'D')
-    { // Alle Buchstaben von A bis C
-        while (a[1] != '8')
-        {                    // Alle Zahlen von 0 bis 7
-            setChip(a, 'O'); // Feld auf 'O' setzen
-            a[1]++;          // Zahl um 1 ERhöhen
+    for(char a = 'A'; a < 'D'; a++){
+        // Alle Buchstaben von A bis C
+        for(char b = '0'; b < '8'; b++){
+            // Alle Zahlen von 0 bis 7
+            // Feld auf 'O' setzen
+            setChip(a, b, 'O');
         }
-        a[1] = '0'; // Zahl zurück auf 0 setzen
-        a[0]++;     // Buchstabe erhöhen
     }
 }
 
-int Board::checkMill(string position)
+
+int Board::checkMill(char orbit, char rotation)
 {
-    // Coordinates from A0 to C7/
-    int millsFound = 0;
-
-    //  Checking if stone is placed in corner
-    if (int(position[1]) % 2 == 0 || position[1] == '0')
+    if(getChip(orbit,rotation)=='O'){
+        return 0;
+    }
+    // Coordinates from A0 to C7/    
+    if (int(rotation) % 2 == 0)//  Checking if stone is placed in corner
     {
-        if (position[1] == '6' && getChip(position) == getChip(position[0], 7 + 48) && getChip(position) == getChip(position[0], 0 + 48))
+
+        if (getChip(orbit,rotation) == getChip(orbit, rotation + 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 2))
+        //+dir Standardprüfung für Ecksteine
         {
-            millsFound++;
-        }
-        else if (getChip(position) == getChip(position[0], int(position[1]) + 1) && getChip(position) == getChip(position[0], int(position[1]) + 2))
-        {
-            millsFound++;
+            // der IM Uhrzeigersinn befindliche Nachbar, sowie dessen Nachbar sind gleich der Farbe des gesetzten Steins
+            return 1;
         }
 
-        if (position[1] == '0' && getChip(position) == getChip(position[0], 6 + 48) && getChip(position) == getChip(position[0], 7 + 48))
+        if (getChip(orbit,rotation) == getChip(orbit, rotation - 1) && getChip(orbit,rotation) == getChip(orbit, rotation - 2))
+        //-dir Standardprüfung für Ecksteine
         {
-            millsFound++;
-        }
-        else if (getChip(position) == getChip(position[0], int(position[1]) - 1) && getChip(position) == getChip(position[0], int(position[1]) - 2))
-        {
-            millsFound++;
+            // der GEGEN den Uhrzeigersinn befindliche Nachbar, sowie dessen Nachbar sind gleich der Farbe des gesetzten Steins
+            return 1;
         }
     }
     else
     {
-        // This is executed, when stone is not placed in corner
-
-        // checking for radial mill
-        if (getChip(position) == getChip('A', position[1]) && getChip(position) == getChip('B', position[1]) && getChip(position) == getChip('C', position[1]))
+        // Der neugesetzte Stein ist ein Mittelstein
+        
+        if (getChip('A', rotation) == getChip('B', rotation) && getChip('B', rotation) == getChip('C', rotation))
+        // Mühle auf Steg
         {
-            millsFound++;
+            // Alle Steine auf dem Betroffenen Steg sind gleichfarbig.
+            return 1;
         }
         // checking for tangential mill
-        if (getChip(position) == getChip(position[0], int(position[1]) - 1) && getChip(position) == getChip(position[0], int(position[1]) + 1))
+
+        if (getChip(orbit,rotation) == getChip(orbit, rotation - 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 1))
+        // Mühle auf dem Rechteck
         {
-            millsFound++;
+            // Farbe des neugestzten Steins ist gleich den auf den Nachbarfeldern auf dem jeweilligen Rechteck
+            return 1;
         }
     }
-    return millsFound;
+
+    
+    if ((rotation == '0' || rotation == '7'|| rotation == '6'))
+    //Ausnahme für Nulldurchgang:
+    {
+        // Der Chip liegt auf Feld 0, 7 oder 6
+        if(getChip(orbit, '0') == getChip(orbit, '7')&&getChip(orbit, '6') == getChip(orbit, '7'))
+        // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt.
+        {
+            return 1;
+        }
+    }
+    return 0;
 }
-bool Board::checkNeighbour(string originPosition, string targetPosition)
+bool Board::checkNeighbour(char orbitOrigin, char rotationOrigin, char orbitTarget, char rotationTarget)
 {
     // Checking for same orbit (A == A?)
-    if (originPosition[0] == targetPosition[0])
+    if (orbitOrigin == orbitTarget)
     {
         // AX-AY ==1 DISTANZ
-        if (abs(originPosition[1] - targetPosition[1]) == 1 || abs(originPosition[1] - targetPosition[1]) == 7)
+        if (abs(rotationOrigin - rotationTarget) == 1 || abs(rotationOrigin - rotationTarget) == 7)
         {
+            // EXCEPTION für Ecksteine FOR X0 & X7
             return true;
-            // EXCEPTION FOR X0 & X7
+            
         }/* 
-        else if (originPosition[1] == 0 && targetPosition[1] == 7 || originPosition[1] == 7 && targetPosition[1] == 0)
+        else if (rotationOrigin == 0 && rotationTarget == 7 || rotationOrigin == 7 && rotationTarget == 0)
         {
             return true;
         } */
     }
-    else if (originPosition[1] == targetPosition[1])
+    else if (rotationOrigin == rotationTarget)
     {
         // Cases: AB BC  BA CB
-        if (originPosition[0] == 'A' && targetPosition[0] == 'B')
+        if (abs(orbitOrigin - orbitTarget) == 1)
         {
             return true;
-        }
-        else if (originPosition[0] == 'B' && targetPosition[0] == 'C')
-        {
-            return true;
-        }
-        else if (originPosition[0] == 'C' && targetPosition[0] == 'B')
-        {
-            return true;
-        }
-        else if (originPosition[0] == 'B' && targetPosition[0] == 'A')
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
     return false;
     
 }
-/* int removeChip(char activePlayer, string position)
-{
-    //!!!Fehlerfall muss beim Funktionsaufruf berücksichtigt werden und kann nicht von removeChip() gehandelt werden!!!
-    if (activePlayer != getChip(position))
-    {
-        setChip(position, 'O');
 
-        if (activePlayer == 'W')
-        {
-            pBlack.lostChips++;
-            cout << "Ein schwarzer Stein wurde von " << position << " entfernt." << endl;
-            return 1;
-        }
-        else
-        {
-            pWhite.lostChips++;
-            cout << "Ein weißer Stein wurde von " << position << " entfernt." << endl;
-            return 1;
-        }
-    }
-    // FEHLERFALL
-    else if (getChip(position) == 'O')
-    {
-        cout << "Das Feld ist leer, bitte wähle ein anderes Feld." << endl;
-        return 0;
-    }
-    else
-    {
-        cout << "Auf dem Feld steht dein eigener Stein, bitte wähle ein anderes Feld." << endl;
-        return 0;
-    }
-} */
 
 void Board::printBoard(){
     cout << "Mühle:" << endl;
-    cout << getChip("A0") << "------------" << getChip("A1") <<"------------"<<getChip("A2")<< endl;
+    cout << getChip('A','0') << "------------" << getChip('A','1') <<"------------"<<getChip('A','2')<< endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
-    cout <<"|    "<< getChip("B0")<< "-------" << getChip("B1") <<"-------"<<getChip("B2")<< "    |"<<endl;
+    cout <<"|    "<< getChip('B','0')<< "-------" << getChip('B','1') <<"-------"<<getChip('B','2')<< "    |"<<endl;
     cout <<"|" <<"    |       " <<"|"<< "       |  "<<"  |"<< endl;
-    cout <<"|    |   "<<getChip("C0")<<"---"<<getChip("C1")<<"---"<<getChip("C2")<<"   |"<<"    |"<<endl;
+    cout <<"|    |   "<<getChip('C','0')<<"---"<<getChip('C','1')<<"---"<<getChip('C','2')<<"   |"<<"    |"<<endl;
     cout <<"|" <<"    |   |       |   |  "<<"  |"<< endl;
-    cout <<getChip("A7")<<"----"<<getChip("B7")<<"---"<<getChip("C7")<<"       "<<getChip("C3")<<"---"<<getChip("B3")<<"----"<<getChip("A3")<<endl;
+    cout <<getChip('A','7')<<"----"<<getChip('B','7')<<"---"<<getChip('C','7')<<"       "<<getChip('C','3')<<"---"<<getChip('B','3')<<"----"<<getChip('A','3')<<endl;
     cout <<"|" <<"    |   |    " <<" "<< "  |   |  "<<"  |"<< endl;
-    cout <<"|    |   "<<getChip("C6")<<"---"<<getChip("C5")<<"---"<<getChip("C4")<<"   |"<<"    |"<<endl;
+    cout <<"|    |   "<<getChip('C','6')<<"---"<<getChip('C','5')<<"---"<<getChip('C','4')<<"   |"<<"    |"<<endl;
     cout <<"|" <<"    |       " <<"|"<< "       |  "<<"  |"<< endl;
-    cout <<"|    "<< getChip("B6")<< "-------" << getChip("B5") <<"-------"<<getChip("B4")<< "    |"<<endl;
+    cout <<"|    "<< getChip('B','6')<< "-------" << getChip('B','5') <<"-------"<<getChip('B','4')<< "    |"<<endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
-    cout << getChip("A6")<< "------------" << getChip("A5") <<"------------"<<getChip("A4")<< endl;
+    cout << getChip('A','6')<< "------------" << getChip('A','5') <<"------------"<<getChip('A','4')<< endl;
     }
