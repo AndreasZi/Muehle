@@ -1,23 +1,37 @@
 #include <iostream>
+#include <string>
 using namespace std;
+
+
+
 class Player
 {
 private:
-    string name;
-
-public:
+    
     int unusedChips;
     int lostChips;
     char color;
+
+public:
+    string name;
+    // Constructors
     Player(char);
     Player(string, char);
-
+    // Functions
     void startTurn();
+    //UNUSED CHIPS
+    int getUnusedChips();
+    void decrementUnusedChip();
+    //LOST CHIPS
     void loseChip();
+    int getLostChips();
     char getColor();
-    string generateName();
+    //NAME
     void setName(string);
+    void generateName();
     string getName();
+    //COLOR
+    void setColor(char);
 };
 
 class Bot : public Player
@@ -30,9 +44,12 @@ public:
     void fillGMarray(void);
     void fillNeighbourArray(void);
 
-    void placeChip();
-    void moveChip();
-    string getRemoveChipPosition();
+    // SCHNITSTELLE MAIN-BOT NOCH UNKLAR
+    string genereateChipPlacement();
+    string genereateChipMovement();
+    string generateRemoveChipPosition();
+
+    void printTest();
 
     Bot(char COLOR) : Player(COLOR)
     {
