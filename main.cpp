@@ -72,12 +72,12 @@ void startTurn(Player &player)
 
             // Spieler A soll die Position des Arrays angeben, an dem er den Stein plazieren will
             cout << "Bitte geben Sie die zu belegende Postion an!" << endl;
-            cin >> targetPosition;
+            cin >> targetPosition; //erwartet wird ein String bestehend aus einem Buchstabe und einer Zahl
 
-        } while (b.getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
+        } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O'); // Position abfragen - ist das Feld frei?
 
         // Stein auf gewählte Position setzen
-        b.setChip(targetPosition, player.getColor());
+        b.setChip(targetPosition[0], targetPosition[1], player.color);
 
         // cout:: //Spielfeld aktualisieren
         player.decrementUnusedChip();
@@ -103,34 +103,33 @@ void startTurn(Player &player)
             cout << "Bitte wählen Sie die Position, an die der Stein verschoben werden soll" << endl;
             cin >> targetPosition; //(getChip(targetPosition) == 'O')
 
-            if (b.checkNeighbour(originPosition, targetPosition) == false && (player.getLostChips() > 6))
-                continue; // Felder sind nicht benachbart und Springen ist noch nicht erlaubt
+            if (b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]) == false && (player.lostChips > 6))
+                continue; //Felder sind nicht benachbart und Springen ist noch nicht erlaubt
 
             // Mühleabfrage
 
-        } while (b.getChip(targetPosition) != 'O'); // Position abfragen - ist das Feld frei?
+        } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O'); // Position abfragen - ist das Feld frei?
         // oder nochmal probieren
         // Bedingung?
         // nach while: Zielposition besetzen?
 
-        // Ursprungsposition zurücksetzen -> 'O'
-        b.setChip(originPosition, 'O');
+        //Ursprungsposition zurücksetzen -> 'O'
+        b.setChip(originPosition[0], originPosition[1], 'O');
 
         // Stein auf gewählte Position setzen
-        b.setChip(targetPosition, player.getColor());
+        b.setChip(targetPosition[0], targetPosition[1], player.color);
+
     }
-    if (b.checkMill(targetPosition))
-    {
-        do
-        {
-            cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
-            cin >> targetPosition;
+    if (b.checkMill(targetPosition[0], targetPosition[1])  ){
+        do{
+        cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
+        cin >> targetPosition;
 
-        } while (b.getChip(targetPosition) == player.getColor() || b.getChip(targetPosition) == 'O');
-        // Gewähltes Feld ist kein gegnerchip
-
-        // Chip entfernen
-        b.setChip(targetPosition, 'O');
-        // opponent lostChips ++
+        }while(b.getChip(targetPosition[0], targetPosition[1]) == player.color || b.getChip(targetPosition[0], targetPosition[1]) == 'O');
+        //Gewähltes Feld ist kein gegnerchip
+        
+        //Chip entfernen
+        b.setChip(targetPosition[0], targetPosition[1], 'O');
+        //opponent lostChips ++
     }
 }
