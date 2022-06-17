@@ -77,7 +77,7 @@ void startTurn(Player &player)
         } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O'); // Position abfragen - ist das Feld frei?
 
         // Stein auf gewählte Position setzen
-        b.setChip(targetPosition[0], targetPosition[1], player.color);
+        b.setChip(targetPosition[0], targetPosition[1], player.getColor());
 
         // cout:: //Spielfeld aktualisieren
         player.decrementUnusedChip();
@@ -103,7 +103,7 @@ void startTurn(Player &player)
             cout << "Bitte wählen Sie die Position, an die der Stein verschoben werden soll" << endl;
             cin >> targetPosition; //(getChip(targetPosition) == 'O')
 
-            if (b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]) == false && (player.lostChips > 6))
+            if (b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]) == false && (player.getLostChips() > 6))
                 continue; //Felder sind nicht benachbart und Springen ist noch nicht erlaubt
 
             // Mühleabfrage
@@ -117,7 +117,7 @@ void startTurn(Player &player)
         b.setChip(originPosition[0], originPosition[1], 'O');
 
         // Stein auf gewählte Position setzen
-        b.setChip(targetPosition[0], targetPosition[1], player.color);
+        b.setChip(targetPosition[0], targetPosition[1], player.getColor());
 
     }
     if (b.checkMill(targetPosition[0], targetPosition[1])  ){
@@ -125,7 +125,7 @@ void startTurn(Player &player)
         cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
         cin >> targetPosition;
 
-        }while(b.getChip(targetPosition[0], targetPosition[1]) == player.color || b.getChip(targetPosition[0], targetPosition[1]) == 'O');
+        }while(b.getChip(targetPosition[0], targetPosition[1]) == player.getColor() || b.getChip(targetPosition[0], targetPosition[1]) == 'O');
         //Gewähltes Feld ist kein gegnerchip
         
         //Chip entfernen
