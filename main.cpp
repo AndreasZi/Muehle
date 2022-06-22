@@ -2,7 +2,7 @@
 #include "Board.cpp"
 //#include "gui.h"
 #include "Player.cpp"
-
+//KOMMENTAR VON WOLFI
 // dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
