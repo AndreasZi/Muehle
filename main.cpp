@@ -2,6 +2,7 @@
 #include "Board.cpp"
 //#include "gui.h"
 #include "Player.cpp"
+//KOMMENTAR VON WOLFI
 //Probieren eines Konfliktkommentars (Manus Branch)
 // dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
