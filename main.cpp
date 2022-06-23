@@ -12,7 +12,7 @@ using namespace std;
 
 
 //Funktion die den Ablauf eines Zuges Beschreibt
-void startTurn(Player&, Board&);
+bool startTurn(Player&, Board&);
 
 //Das tatsächliche Spiel wird gespielt. Am Ende wird der Gewinner returnt
 Player getWinner(Player&, Player&, Board&);
@@ -27,7 +27,7 @@ int main()
     //testingBOT.printTest();
 
 
-    // Spielmodus auswählen: 1 vs. 1 oder 1 vs. Bot
+/*    // Spielmodus auswählen: 1 vs. 1 oder 1 vs. Bot
     for (int i = 10; i > 1; i--)
     {
         cout << "Bitte Spielmodul wählen!\n [1] = Singleplayer\n [2] = Multiplayer" << endl;
@@ -40,38 +40,51 @@ int main()
             Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
             break;
         }
-/*
+
         else if (spieleranzahl == 1)
         {
             Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
             //Bot pWhite('W');    // Spieler pBlack ist ein Objekt der Klasse Spieler
             break;
-        }  */
+        }
         else
         {
             cout << "Fehlerhafte Eingabe! Bitte die Zahl 1 oder 2 eingeben!" << endl;
         }
-    }
+    }*/
 
+    char winner = getWinner(pBlack, pWhite, b).getColor();
 
-
-    cout << "der Gewinner ist " << getWinner(pBlack, pWhite, b).getColor() << " Herzlichen Glückwunsch!";
+    cout << "der Gewinner ist " << winner << " Herzlichen Glückwunsch!";
 
     return 0;
 }
 
 Player getWinner(Player& p1, Player& p2, Board& board){
     //Partie wird gestartet
-    while (1) //Läuft durch bis ein Spieler den Loop bricht.
-    {   
-        board.printBoard();
-        startTurn(p1, board);
-        if(p2.getLostChips() > 7){
+
+
+
+    while (true){
+        //Läuft durch bis ein Spieler den Loop bricht.
+
+        //Zug wird für Spieler 1 ...
+        if (startTurn(p1, board)){
+            p2.loseChip();
+        }
+        if(p2.getLostChips() >= 7){
+            //Spieler 2 hat verloren, Spieler 1 wird als Gewinner returnt
             return p1;
         }
-        board.printBoard();
-        startTurn(p2, board);
-        if(p1.getLostChips() > 7){
+
+
+
+        //...und für Spieler 2 ausgeführt
+        if (startTurn(p2, board)){
+            p1.loseChip();
+        }
+        if(p1.getLostChips() >= 7){
+            //Spieler 1 hat verloren, Spieler 2 wird als Gewinner returnt
             return p2;
         }
     
@@ -83,8 +96,9 @@ Player getWinner(Player& p1, Player& p2, Board& board){
 
 
 
-void startTurn(Player &player, Board &b)
+bool startTurn(Player &player, Board &b)
 {
+    b.printBoard();
     string targetPosition;
     cout << "Spieler " << player.getColor() << " ist am Zug" << endl;
     // Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
@@ -126,12 +140,11 @@ void startTurn(Player &player, Board &b)
             cout << "Bitte wählen Sie die Position, an die der Stein verschoben werden soll" << endl;
             cin >> targetPosition; //(getChip(targetPosition) == 'O')
 
-            if (b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]) == false && (player.getLostChips() > 6))
-                continue; //Felder sind nicht benachbart und Springen ist noch nicht erlaubt
+             //Felder sind nicht benachbart und Springen ist noch nicht erlaubt
 
             // Mühleabfrage
 
-        } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O'); // Position abfragen - ist das Feld frei?
+        } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O'||!b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]) && (player.getLostChips() > 6)); // Position abfragen - ist das Feld frei?
         // oder nochmal probieren
         // Bedingung?
         // nach while: Zielposition besetzen?
@@ -144,15 +157,22 @@ void startTurn(Player &player, Board &b)
 
     }
     if (b.checkMill(targetPosition[0], targetPosition[1])  ){
+        //Mühle Gefunden.
         do{
+            //Wird wiederholt solange man keinen Gengerchip ausgewählt hat.
         cout << "Wählen Sie einen gegnerischen Stein, um ihn zu entfernen." << endl;
         cin >> targetPosition;
 
-        }while(b.getChip(targetPosition[0], targetPosition[1]) == player.getColor() || b.getChip(targetPosition[0], targetPosition[1]) == 'O');
-        //Gewähltes Feld ist kein gegnerchip
+        }
+        while(b.getChip(targetPosition[0], targetPosition[1]) == player.getColor() || b.getChip(targetPosition[0], targetPosition[1]) == 'O'|| b.checkMill(targetPosition[0], targetPosition[1]));
+
+
+        //Gewähltes Feld ist ein gegnerchip
         
         //Chip entfernen
         b.setChip(targetPosition[0], targetPosition[1], 'O');
-        //opponent lostChips ++
+
+        return true;//opponent lostChips ++
     }
+    return false;
 }

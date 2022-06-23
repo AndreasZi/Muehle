@@ -114,6 +114,14 @@ int main(){
         std::cout << "fehler\n";
     }
 
+    std::cout << "Kein Nachbar ueber Ecke: ";
+    if (!b.checkNeighbour('C', '2', 'B', '2')){
+        std::cout << "erkannt\n";
+    }
+    else{
+        std::cout << "fehler\n";
+    }
+
 
     std::cout << "Nachbar auf Steg: ";
     if (b.checkNeighbour('C', '1', 'B', '1')){

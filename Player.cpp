@@ -10,7 +10,7 @@ Player::Player(char COLOR)
 Player::Player(string NAME, char COLOR)
 {
     unusedChips = 9;
-    lostChips = 0;
+    lostChips = 4;
     color = COLOR;
     setName(NAME);
 }
@@ -19,6 +19,7 @@ void Player::startTurn()
 }
 void Player::loseChip()
 {
+    lostChips++;
 }
 void Player::setName(string NAME)
 {

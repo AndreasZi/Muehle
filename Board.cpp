@@ -107,7 +107,7 @@ bool Board::checkNeighbour(char orbitOrigin, char rotationOrigin, char orbitTarg
             return true;
         } */
     }
-    else if (rotationOrigin == rotationTarget)
+    else if (rotationOrigin == rotationTarget && rotationOrigin%2 != 0)
     {
         // Cases: AB BC  BA CB
         if (abs(orbitOrigin - orbitTarget) == 1)
