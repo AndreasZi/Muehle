@@ -1,79 +1,60 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-class Player // Erstelle eine Klasse namens Player
+
+
+class Player
 {
 private:
-    /* data */
-    string name;
-
-public:
+    
     int unusedChips;
     int lostChips;
     char color;
+
+public:
+    string name;
+    // Constructors
     Player(char);
     Player(string, char);
-
+    // Functions
     void startTurn();
+    //UNUSED CHIPS
+    int getUnusedChips();
+    void decrementUnusedChip();
+    //LOST CHIPS
     void loseChip();
+    int getLostChips();
     char getColor();
-    string generateName();
+    //NAME
     void setName(string);
+    void generateName();
     string getName();
+    //COLOR
+    void setColor(char);
 };
 
 class Bot : public Player
 {
 private:
-    // char generateColor(); //Immer anders als Spieler
-
-    // ARRAY der globalen Mühlen | 16 Mühlen a 3 Chips
     string globalMills[16][3];
-    // ARRAY der Nachbarn | 24 ChipPlacements with max. 4 Neighbours
     string neighbours[24][4];
 
 public:
-    // Bot();
-    // Bot(char);
-    //~Bot();
     void fillGMarray(void);
     void fillNeighbourArray(void);
 
-    void placeChip();
-    void moveChip();
-    string getRemoveChipPosition();
+    // SCHNITSTELLE MAIN-BOT NOCH UNKLAR
+    string genereateChipPlacement();
+    string genereateChipMovement();
+    string generateRemoveChipPosition();
+
+    void printTest();
 
     Bot(char COLOR) : Player(COLOR)
     {
-        // unusedChips = 9;
-        // lostChips = 0;
-        // color = COLOR;
         setName("Bot");
         fillGMarray();
         fillNeighbourArray();
     }
 };
-
-/*Bot :: Bot(char COLOR):Player(COLOR)
-{
-    //unusedChips = 9;
-    //lostChips = 0;
-    //color = COLOR;
-    setName("Bot");
-    fillGMarray();
-    fillNeighbourArray();
-}*/
-
-/*Bot::Bot()
-{
-    unusedChips = 9;
-    lostChips = 0;
-    // color = generateColor();
-    name = 'Bot';
-    fillGMarray();
-    fillNeighbourArray();
-}*/
-
-/*Bot::~Bot(){
-
-}*/
