@@ -2,9 +2,8 @@
 #include "Board.cpp"
 //#include "gui.h"
 #include "Player.cpp"
-//KOMMENTAR VON WOLFI
-//Probieren eines Konfliktkommentars (Manus Branch)
-// dies ist ein sickes Mühlespiel!!!!!
+
+// dies ist ein sickes Mühlespiel!
 using namespace std;
 
 // FUNKTIONEN FÜR BOT MÜSSEN ÜBER MAIN ABGEWICKELT WERDEN
@@ -21,11 +20,11 @@ int main()
     //Bot testingBOT('T');
     //testingBOT.printTest();
 
-/*
-    // Spielmodus auswählen: 1V1 OR 1VBot
+
+    // Spielmodus auswählen: 1 vs. 1 oder 1 vs. Bot
     for (int i = 10; i > 1; i--)
     {
-        cout << "Wie viele Menschen spielen hier mit??? (1 oder 2 eingeben)" << endl;
+        cout << "Bitte Spielmodul wählen!\n [1] = Singleplayer\n [2] = Multiplayer" << endl;
         int spieleranzahl;
         cin >> spieleranzahl;
 
@@ -35,18 +34,19 @@ int main()
             Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
             break;
         }
+/*
         else if (spieleranzahl == 1)
         {
             Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
             //Bot pWhite('W');    // Spieler pBlack ist ein Objekt der Klasse Spieler
             break;
-        }
+        }  */
         else
         {
-            cout << "Ihre Eingabe ist fehlerhaft, bitte erneut eingeben" << endl;
+            cout << "Fehlerhafte Eingabe! Bitte die Zahl 1 oder 2 eingeben!" << endl;
         }
     }
-    */
+
 
     b.printBoard();
 
@@ -74,8 +74,8 @@ void startTurn(Player &player)
             // Spieler A soll die Position des Arrays angeben, an dem er den Stein plazieren will
             cout << "Bitte geben Sie die zu belegende Postion an!" << endl;
             cin >> targetPosition; //erwartet wird ein String bestehend aus einem Buchstabe und einer Zahl
-
-        } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O'); // Position abfragen - ist das Feld frei?
+// Position abfragen - ist das Feld frei?
+        } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O');
 
         // Stein auf gewählte Position setzen
         b.setChip(targetPosition[0], targetPosition[1], player.getColor());
