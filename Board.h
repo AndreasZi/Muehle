@@ -5,8 +5,9 @@ using namespace std;
 class Board
 {
 private:
-    char cells[3][8]; // Zweidimensionales Array, welches die Werte 'O', 'W' und 'B' speichern soll.
+    
 public:
+char cells[3][8]; // Zweidimensionales Array, welches die Werte 'O', 'W' und 'B' speichern soll.
     Board();
 
     
