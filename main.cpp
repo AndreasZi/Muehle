@@ -8,32 +8,51 @@
 using namespace std;
 
 
-Board b;
-void startTurn(Player&);
+
+
+//Funktion die den Ablauf eines Zuges Beschreibt
+void startTurn(Player&, Board&);
+
+//Das tatsächliche Spiel wird gespielt. Am Ende wird der Gewinner returnt
+Player getWinner(Player&, Player&, Board&);
 
 int main()
 {
     
     Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
     Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
-    
+    Board b; // Spielfeld auf dem die Partie gspielt werden soll
 
-    b.printBoard();
 
-    while (pWhite.lostChips < 7 && pBlack.lostChips < 7)
-    {
-        startTurn(pWhite);
-        b.printBoard();
-        startTurn(pBlack);
-        b.printBoard();
-    }
+    cout << "der Gewinner ist " << getWinner(pBlack, pWhite, b).color << " Herzlichen Glückwunsch!";
 
     return 0;
 }
 
+Player getWinner(Player& p1, Player& p2, Board& board){
+    //Partie wird gestartet
+    while (1) //Läuft durch bis ein Spieler den Loop bricht.
+    {   
+        board.printBoard();
+        startTurn(p1, board);
+        if(p2.lostChips > 7){
+            return p1;
+        }
+        board.printBoard();
+        startTurn(p2, board);
+        if(p1.lostChips > 7){
+            return p2;
+        }
+    
+    }
+
+    // getWinner(p1)
+
+}
 
 
-void startTurn(Player &player)
+
+void startTurn(Player &player, Board &b)
 {
     string targetPosition;
     cout << "Spieler " << player.color << " ist am Zug" << endl;
