@@ -14,20 +14,20 @@ Board::Board(/* args */)
 void Board::setChip(char orbit, char rotation, char color)
 {
     // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
-    cells[orbit][rotation] = color;
+    cells[int(orbit)][int(rotation)] = color;
 }
 
 
 char Board::getChip(char orbit, char rotation)
 {
     // Getter, der den Wert des Arrays cells an der Stelle coordinate (zb. "A0") zu returnt.
-    return cells[orbit][rotation];
+    return cells[int(orbit)][int(rotation)];
 }
 
 void Board::emptyBoard()
 {   
     //Alle Felder mit Char 'O' zu füllen
-    char* ptr = &cells['A']['0']; //pointer um die Mehrdimensionalität zu überspringen
+    char* ptr = &cells[int('A')][int('0')]; //pointer um die Mehrdimensionalität zu überspringen
     for(int i = 0; i < 24; i++){
         *(ptr + i) = 'O';
     } 

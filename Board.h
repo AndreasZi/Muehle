@@ -1,3 +1,6 @@
+#ifndef HEADERFILE_H
+#define HEADERFILE_H
+
 #include <iostream>
 using namespace std;
 
@@ -19,3 +22,6 @@ char cells[3][8]; // Zweidimensionales Array, welches die Werte 'O', 'W' und 'B'
     int checkMill(char, char);
     bool checkNeighbour(char, char, char, char);
 };
+
+
+#endif
