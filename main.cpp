@@ -2,14 +2,14 @@
 #include "Board.cpp"
 //#include "gui.h"
 #include "Player.cpp"
-//KOMMENTAR VON WOLFI
+//KOMMENTAR VON WOLFIgit
 // dies ist ein sickes Mühlespiel!!!!!
 using namespace std;
 
 // FUNKTIONEN FÜR BOT MÜSSEN ÜBER MAIN ABGEWICKELT WERDEN
 // EG: FELDSCANS MÜSSEN ÜBER MAIN LAUFEN, BOT KANN NICHT DIREKT AUF BOARD ZUGREIFEN
 
-Board b;
+Board b; //VLLT in main() inkludieren?
 void startTurn(Player &);
 
 int main()
@@ -49,6 +49,7 @@ int main()
 
     b.printBoard();
 
+    //WHAT THE HECK IS GOING ON HERE?
     while (pWhite.getLostChips() < 7 && pBlack.getLostChips() < 7)
     {
         startTurn(pWhite);
