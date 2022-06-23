@@ -54,7 +54,7 @@ int main()
     */
 
 
-    cout << "der Gewinner ist " << getWinner(pBlack, pWhite, b).color << " Herzlichen Glückwunsch!";
+    cout << "der Gewinner ist " << getWinner(pBlack, pWhite, b).getColor() << " Herzlichen Glückwunsch!";
 
     return 0;
 }
@@ -65,12 +65,12 @@ Player getWinner(Player& p1, Player& p2, Board& board){
     {   
         board.printBoard();
         startTurn(p1, board);
-        if(p2.lostChips > 7){
+        if(p2.getLostChips() > 7){
             return p1;
         }
         board.printBoard();
         startTurn(p2, board);
-        if(p1.lostChips > 7){
+        if(p1.getLostChips() > 7){
             return p2;
         }
     
