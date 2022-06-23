@@ -26,14 +26,11 @@ char Board::getChip(char orbit, char rotation)
 
 void Board::emptyBoard()
 {   
-    for(char a = 'A'; a < 'D'; a++){
-        // Alle Buchstaben von A bis C
-        for(char b = '0'; b < '8'; b++){
-            // Alle Zahlen von 0 bis 7
-            // Feld auf 'O' setzen
-            setChip(a, b, 'O');
-        }
-    }
+    //Alle Felder mit Char 'O' zu füllen
+    char* ptr = &cells['A']['0']; //pointer um die Mehrdimensionalität zu überspringen
+    for(int i = 0; i < 24; i++){
+        *(ptr + i) = 'O';
+    } 
 }
 
 
@@ -139,3 +136,6 @@ void Board::printBoard(){
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<< endl;
     cout << getChip('A','6')<< "------------" << getChip('A','5') <<"------------"<<getChip('A','4')<< endl;
     }
+
+    
+

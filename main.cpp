@@ -9,13 +9,19 @@ using namespace std;
 // FUNKTIONEN FÜR BOT MÜSSEN ÜBER MAIN ABGEWICKELT WERDEN
 // EG: FELDSCANS MÜSSEN ÜBER MAIN LAUFEN, BOT KANN NICHT DIREKT AUF BOARD ZUGREIFEN
 
-Board b;
-void startTurn(Player &);
+
+
+//Funktion die den Ablauf eines Zuges Beschreibt
+void startTurn(Player&, Board&);
+
+//Das tatsächliche Spiel wird gespielt. Am Ende wird der Gewinner returnt
+Player getWinner(Player&, Player&, Board&);
 
 int main()
 {
     Player pBlack('B'); // Spieler pWhite ist ein Objekt der Klasse Spieler
     Player pWhite('W'); // Spieler pBlack ist ein Objekt der Klasse Spieler
+    Board b; // Spielfeld auf dem die Partie gspielt werden soll
 
     //Bot testingBOT('T');
     //testingBOT.printTest();
@@ -48,20 +54,36 @@ int main()
     }
 
 
-    b.printBoard();
 
-    while (pWhite.getLostChips() < 7 && pBlack.getLostChips() < 7)
-    {
-        startTurn(pWhite);
-        b.printBoard();
-        startTurn(pBlack);
-        b.printBoard();
-    }
+    cout << "der Gewinner ist " << getWinner(pBlack, pWhite, b).getColor() << " Herzlichen Glückwunsch!";
 
     return 0;
 }
 
-void startTurn(Player &player)
+Player getWinner(Player& p1, Player& p2, Board& board){
+    //Partie wird gestartet
+    while (1) //Läuft durch bis ein Spieler den Loop bricht.
+    {   
+        board.printBoard();
+        startTurn(p1, board);
+        if(p2.getLostChips() > 7){
+            return p1;
+        }
+        board.printBoard();
+        startTurn(p2, board);
+        if(p1.getLostChips() > 7){
+            return p2;
+        }
+    
+    }
+
+    // getWinner(p1)
+
+}
+
+
+
+void startTurn(Player &player, Board &b)
 {
     string targetPosition;
     cout << "Spieler " << player.getColor() << " ist am Zug" << endl;

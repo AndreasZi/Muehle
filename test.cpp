@@ -139,7 +139,8 @@ int main(){
         std::cout << "fehler\n";
     }
 
-
+    b.emptyBoard();
+    b.printBoard();
 
 }
 
