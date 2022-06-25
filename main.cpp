@@ -144,7 +144,9 @@ bool startTurn(Player &player, Board &b)
 
             // Mühleabfrage
 
-        } while (b.getChip(targetPosition[0], targetPosition[1]) != 'O'||!b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]) && (player.getLostChips() > 6)); // Position abfragen - ist das Feld frei?
+        } 
+        //Das Ursprungsfeld muss vom Spieler besetzt sein, das Zielfeld muss leer sein, die Beiden Felder müssen benachbart sein.
+        while (b.getChip(originPosition[0], originPosition[1]) != player.getColor()||b.getChip(targetPosition[0], targetPosition[1]) != 'O'||!b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]) && (player.getLostChips() > 6)); // Position abfragen - ist das Feld frei?
         // oder nochmal probieren
         // Bedingung?
         // nach while: Zielposition besetzen?
