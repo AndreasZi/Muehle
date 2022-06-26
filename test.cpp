@@ -79,6 +79,20 @@ int main(){
     }
     
 
+    b .emptyBoard();
+    std::cout<<"Ausnahmefall im Nulldurchgang"<<endl;
+    b.setChip('A','0','B');
+    b.setChip('A','6','W');
+    b.setChip('A','7','W');
+    b.setChip('B','0','W');
+    std::cout << "+exception Eckmühle: ";
+    if (!b.checkMill('A','6')){
+        std::cout << "erkannt\n";
+    }
+    else{
+        std::cout << "fehler\n";
+    }
+
 
 
     std::cout<<"leeres Feld"<<endl;

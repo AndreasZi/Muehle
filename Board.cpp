@@ -43,14 +43,14 @@ int Board::checkMill(char orbit, char rotation)
     if (int(rotation) % 2 == 0)//  Checking if stone is placed in corner
     {
 
-        if (getChip(orbit,rotation) == getChip(orbit, rotation + 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 2))
+        if (getChip(orbit,rotation) == getChip(orbit, rotation + 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 2) && rotation != '6')
         //+dir Standardprüfung für Ecksteine
         {
             // der IM Uhrzeigersinn befindliche Nachbar, sowie dessen Nachbar sind gleich der Farbe des gesetzten Steins
             return 1;
         }
 
-        if (getChip(orbit,rotation) == getChip(orbit, rotation - 1) && getChip(orbit,rotation) == getChip(orbit, rotation - 2))
+        if (getChip(orbit,rotation) == getChip(orbit, rotation - 1) && getChip(orbit,rotation) == getChip(orbit, rotation - 2) && rotation != '0')
         //-dir Standardprüfung für Ecksteine
         {
             // der GEGEN den Uhrzeigersinn befindliche Nachbar, sowie dessen Nachbar sind gleich der Farbe des gesetzten Steins
@@ -82,7 +82,7 @@ int Board::checkMill(char orbit, char rotation)
     //Ausnahme für Nulldurchgang:
     {
         // Der Chip liegt auf Feld 0, 7 oder 6
-        if(getChip(orbit, '0') == getChip(orbit, '7')&&getChip(orbit, '6') == getChip(orbit, '7'))
+        if(getChip(orbit, '0') == getChip(orbit, '7') && getChip(orbit, '6') == getChip(orbit, '7'))
         // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt.
         {
             return 1;
