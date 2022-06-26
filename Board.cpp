@@ -12,25 +12,37 @@ Board::Board(/* args */)
 
 
 
-void Board::setChip(char orbit, char rotation, Player player)
+void Board::setChip(char orbit, char rotation, Player &player)
 {
     // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
-    cells[int(orbit)-65][int(rotation)-48] = player;
+    cells[int(orbit)-65][int(rotation)-48] = &player;
+}
+
+void Board::deleteChip(char orbit, char rotation)
+{
+    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
+    cells[int(orbit)-65][int(rotation)-48] = &empty;
 }
 
 
 char Board::getChip(char orbit, char rotation)
 {
     // Getter, der den Wert des Arrays cells an der Stelle coordinate (zb. "A0") zu returnt.
-    return cells[int(orbit)-65][int(rotation)-48].getColor();
+    return cells[int(orbit)-65][int(rotation)-48]->getColor();
+}
+
+Player* Board::getPlayer(char orbit, char rotation)
+{
+    // Getter, der den Wert des Arrays cells an der Stelle coordinate (zb. "A0") zu returnt.
+    return cells[int(orbit)-65][int(rotation)-48];
 }
 
 void Board::emptyBoard()
 {   
     //Alle Felder mit Char 'O' zu füllen
-    Player* ptr = &cells[0][0]; //pointer um die Mehrdimensionalität zu überspringen
+    Player **ptr = &cells[0][0]; //pointer um die Mehrdimensionalität zu überspringen
     for(int i = 0; i < 24; i++){
-        *(ptr + i) = empty;
+        *(ptr + i) = &empty;
     } 
 }
 
@@ -91,7 +103,6 @@ int Board::checkMill(char orbit, char rotation)
         else if (getChip(orbit,rotation) == getChip(orbit, rotation - 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 1))
         // Mühle auf dem Rechteck
         {
-            cout << orbit << ", " << rotation << ", " << getChip(orbit,rotation) << "; " << orbit << ", " << rotation - 1 << ", "  << getChip(orbit, rotation - 1)  << "; " << orbit << ", " << rotation + 1 << ", " << getChip(orbit, rotation + 1) << endl ;
             // Farbe des neugestzten Steins ist gleich den auf den Nachbarfeldern auf dem jeweilligen Rechteck
             return 1;
         }

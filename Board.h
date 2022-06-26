@@ -10,14 +10,16 @@ class Board
 {
 private:
     Player empty;
-    Player cells[3][8]; // Zweidimensionales Array, welches die Werte 'O', 'W' und 'B' speichern soll.
+    Player *cells[3][8]; // Zweidimensionales Array, welches die Werte 'O', 'W' und 'B' speichern soll.
 public:
 
     Board();
 
     
-    void setChip(char, char, Player);
+    void setChip(char, char, Player&);
+    void deleteChip(char, char);
     char getChip(char, char);
+    Player* getPlayer(char, char);
 
     void emptyBoard();
     void printBoard();

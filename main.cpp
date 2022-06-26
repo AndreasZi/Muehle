@@ -26,7 +26,7 @@ using namespace std;
 
 
 //Funktion die den Ablauf eines Zuges Beschreibt
-bool startTurn(Player&, Board&);
+void startTurn(Player&, Board&);
 
 //Das tatsächliche Spiel wird gespielt. Am Ende wird der Gewinner returnt
 Player getWinner(Player&, Player&, Board&);
@@ -82,13 +82,7 @@ Player getWinner(Player& p1, Player& p2, Board& board)
     // Loop wird unterbrochen, wenn ein Spieler verliegt (nur noch 2 Steine hat)
     {
         // Zug wird für Spieler 1 ...
-        if (startTurn(p1, board))
-        // Zug wird gestartet
-        {
-            // Eine Mühle wurde erkannt, der Gegner verliert einen Stein
-            p2.loseChip();
-        }
-
+        startTurn(p1, board);
         if(p2.getLostChips() >= 7)
         {
             // Spieler 2 hat verloren, Spieler 1 wird als Gewinner returned
@@ -96,12 +90,7 @@ Player getWinner(Player& p1, Player& p2, Board& board)
         }
 
         // ...und für Spieler 2 ausgeführt
-        if (startTurn(p2, board))
-        // Zug wird gestartet
-        {
-            // Eine Mühle wurde erkannt, der Gegner verliert einen Stein
-            p1.loseChip();
-        }
+        startTurn(p2, board);
         if(p1.getLostChips() >= 7)
         {
             //Spieler 1 hat verloren, Spieler 2 wird als Gewinner returned
@@ -114,7 +103,7 @@ Player getWinner(Player& p1, Player& p2, Board& board)
 
 
 
-bool startTurn(Player &player, Board &b)
+void startTurn(Player &player, Board &b)
 {
     // Das aktuelle Spielfeld wird dargestellt
     b.printBoard();
@@ -140,7 +129,7 @@ bool startTurn(Player &player, Board &b)
         while (b.getChip(targetPosition[0], targetPosition[1]) != 'O');
 
         // Stein auf gewählte Position setzen
-        b.setChip(targetPosition[0], targetPosition[1], player.getColor());
+        b.setChip(targetPosition[0], targetPosition[1], player);
 
         player.decrementUnusedChip();
         cout << "Sie haben noch " << player.getUnusedChips() << " ungesetzte Steine" << endl;
@@ -178,10 +167,10 @@ bool startTurn(Player &player, Board &b)
         while (b.getChip(originPosition[0], originPosition[1]) != player.getColor()||b.getChip(targetPosition[0], targetPosition[1]) != 'O'||!neighbourCondition);
 
         // Ursprungsposition zurücksetzen -> 'O'
-        b.setChip(originPosition[0], originPosition[1], 'O');
+        b.deleteChip(originPosition[0], originPosition[1]);
 
         // Stein auf gewählte Position setzen
-        b.setChip(targetPosition[0], targetPosition[1], player.getColor());
+        b.setChip(targetPosition[0], targetPosition[1], player);
 
     }
     if (b.checkMill(targetPosition[0], targetPosition[1]))
@@ -195,12 +184,11 @@ bool startTurn(Player &player, Board &b)
         // Wird wiederholt solange man keinen Gengerchip ausgewählt hat || der ausgewählte Gegnerchip einer geschlossenen Mühle angehört
         while(b.getChip(targetPosition[0], targetPosition[1]) == player.getColor() || b.getChip(targetPosition[0], targetPosition[1]) == 'O'|| b.checkMill(targetPosition[0], targetPosition[1]));
 
-        // Gegnerchip wurde ausgewählt und entfernt -> Feld ist nun leer (O)
-        b.setChip(targetPosition[0], targetPosition[1], 'O');
+        // Gegnerische LostChips werden erhöht
 
-        // Mit "return true" wird eine gefundene Mühle signalisiert
-        return true;
+        b.getPlayer(targetPosition[0], targetPosition[1])->loseChip();
+
+        // Gegnerchip wurde ausgewählt und entfernt -> Feld ist nun leer (O) und Spieler verliert einen Stein
+        b.deleteChip(targetPosition[0], targetPosition[1]);
     }
-    // Falls keine Mühle gefunden wird, wird "false" returned
-    return false;
 }
