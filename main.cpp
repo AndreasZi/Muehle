@@ -1,3 +1,17 @@
+/* 
+Spiel Mühle:
+• Regeln werden eingehalten
+• Ich möchte gegen meine Freundin spielen
+• Ich möchte auch alleine Spielen können
+• Ich möchte den aktuellen Spielstand sehen können
+• Es soll spaß machen
+• git soll genutzt werden
+
+Anforderungen die HART sind:
+• Kommentare müssen vorhanden sein
+• Dokumentation 
+*/
+
 #include <iostream>
 #include "Board.cpp"
 //#include "gui.h"
@@ -110,7 +124,7 @@ bool startTurn(Player &player, Board &b)
 
     // Der Spieler, welcher am Zug ist, wird benannt
     cout << "Spieler " << player.getColor() << " ist am Zug" << endl;
-    
+
     // Abfrage zu "Beginn" des Spiels: Sind noch Steine zum Setzen übrig?
     if (player.getUnusedChips() > 0)
     {
@@ -135,6 +149,7 @@ bool startTurn(Player &player, Board &b)
     {
         // Einen Stein vom aktuellen Spieler verschieben
         string originPosition;
+        bool neighbourCondition;
 
         do
         {
@@ -145,9 +160,22 @@ bool startTurn(Player &player, Board &b)
             // Wohin soll der Stein verschoben werden?
             cout << "Zielposition eingeben" << endl;
             cin >> targetPosition;
+
+            //
+            if (player.getLostChips() == 6)
+            {
+                // Wenn der Spieler nur noch 3 Chips hat, ist die neighbourCondition immer erfüllt
+                neighbourCondition = true;
+            }
+            else
+            {
+                // Wenn der Spieler mehr als 3 Chips hat muss geprüft werden, ob das gewählte Feld ein Nachbarfeld ist
+                neighbourCondition = b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1]);
+            }
+           
         } 
         // Das Ursprungsfeld muss vom Spieler besetzt sein, das Zielfeld muss leer sein, das Zielfeld darf nur einen Schritt entfernt sein - andernfalls werden die obigen Schritte wiederholt
-        while (b.getChip(originPosition[0], originPosition[1]) != player.getColor()||b.getChip(targetPosition[0], targetPosition[1]) != 'O'||!b.checkNeighbour(originPosition[0], originPosition[1], targetPosition[0], targetPosition[1])); // Position abfragen - ist das Feld frei?
+        while (b.getChip(originPosition[0], originPosition[1]) != player.getColor()||b.getChip(targetPosition[0], targetPosition[1]) != 'O'||!neighbourCondition);
 
         // Ursprungsposition zurücksetzen -> 'O'
         b.setChip(originPosition[0], originPosition[1], 'O');
