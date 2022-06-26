@@ -3,8 +3,10 @@
 
 Board::Board(/* args */)
 {
+    //Leerem "Player" einen Char zuweisen
     empty.setColor('O');
-    //*cells = ;
+
+    //Spielfeld vor Spielstart leeren
     emptyBoard();
 }
 
@@ -49,19 +51,21 @@ void Board::emptyBoard()
 
 int Board::checkMill(char orbit, char rotation)
 {
-    if(getChip(orbit,rotation)=='O'){
+    if(getPlayer(orbit,rotation)=='O'){
+        //Wenn das geprüfte Feld Leer ist, ist definitiv keine Mühle vorhanden :P
         return 0;
     }
+
     // Coordinates from A0 to C7/    
     if (int(rotation) % 2 == 0)//  Checking if stone is placed in corner
     {
         if ((rotation == '0' || rotation == '6'))
         //Ausnahme für Nulldurchgang:
         {
-            // Der Chip liegt auf Feld 0, 7 oder 6
+            // Der Chip liegt auf Feld 0 oder 6 und könnte Somit durch Null gehen
             if(getChip(orbit, '0') == getChip(orbit, '7') && getChip(orbit, '6') == getChip(orbit, '7'))
-            // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt.
             {
+                // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt. -> Mühle
                 return 1;
             }
         }
@@ -121,6 +125,7 @@ int Board::checkMill(char orbit, char rotation)
     }
     return 0;
 }
+
 bool Board::checkNeighbour(char orbitOrigin, char rotationOrigin, char orbitTarget, char rotationTarget)
 {
     // Checking for same orbit (A == A?)
@@ -129,29 +134,27 @@ bool Board::checkNeighbour(char orbitOrigin, char rotationOrigin, char orbitTarg
         // AX-AY ==1 DISTANZ
         if (abs(rotationOrigin - rotationTarget) == 1 || abs(rotationOrigin - rotationTarget) == 7)
         {
+            // Die Distanz zwischen den Beiden Punkten hat den Betrag 1 oder 7 (0-7 oder 7-0)
             // EXCEPTION für Ecksteine FOR X0 & X7
             return true;
             
-        }/* 
-        else if (rotationOrigin == 0 && rotationTarget == 7 || rotationOrigin == 7 && rotationTarget == 0)
-        {
-            return true;
-        } */
+        }
     }
     else if (rotationOrigin == rotationTarget && rotationOrigin%2 != 0)
     {
         // Cases: AB BC  BA CB
         if (abs(orbitOrigin - orbitTarget) == 1)
         {
+            // Die Distanz zwischen den Beiden Punkten hat den Betrag 1
             return true;
         }
     }
     return false;
-    
 }
 
 
 void Board::printBoard(){
+    //Ausgabe des Mühlefelds in der Console
     cout << "Mühle:" << endl;
     cout << getChip('A','0') << "------------" << getChip('A','1') <<"------------"<<getChip('A','2')<<"       " <<"A0" << "------------" << "A1" <<"-----------"<<"A2"<< endl;
     cout <<"|" <<"            " <<"|"<< "            "<<"|"<<"       "<<"|" <<"             " <<"|"<< "            "<<"|"<< endl;
