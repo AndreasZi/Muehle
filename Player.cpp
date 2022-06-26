@@ -1,5 +1,7 @@
 #include "Player.h"
+Player::Player(){
 
+}
 Player::Player(char COLOR)
 {
     unusedChips = 9;
@@ -32,6 +34,10 @@ int Player::getLostChips()
 char Player::getColor()
 {
     return color;
+}
+void Player::setColor(char COLOR)
+{
+    color = COLOR;
 }
 int Player::getUnusedChips()
 {

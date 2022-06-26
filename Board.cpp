@@ -1,8 +1,9 @@
 #include "Board.h"
 
+
 Board::Board(/* args */)
 {
-    
+    empty.setColor('O');
     //*cells = ;
     emptyBoard();
 }
@@ -11,25 +12,25 @@ Board::Board(/* args */)
 
 
 
-void Board::setChip(char orbit, char rotation, char color)
+void Board::setChip(char orbit, char rotation, Player player)
 {
     // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
-    cells[int(orbit)-65][int(rotation)-48] = color;
+    cells[int(orbit)-65][int(rotation)-48] = player;
 }
 
 
 char Board::getChip(char orbit, char rotation)
 {
     // Getter, der den Wert des Arrays cells an der Stelle coordinate (zb. "A0") zu returnt.
-    return cells[int(orbit)-65][int(rotation)-48];
+    return cells[int(orbit)-65][int(rotation)-48].getColor();
 }
 
 void Board::emptyBoard()
 {   
     //Alle Felder mit Char 'O' zu füllen
-    char* ptr = &cells[0][0]; //pointer um die Mehrdimensionalität zu überspringen
+    Player* ptr = &cells[0][0]; //pointer um die Mehrdimensionalität zu überspringen
     for(int i = 0; i < 24; i++){
-        *(ptr + i) = 'O';
+        *(ptr + i) = empty;
     } 
 }
 
@@ -42,7 +43,16 @@ int Board::checkMill(char orbit, char rotation)
     // Coordinates from A0 to C7/    
     if (int(rotation) % 2 == 0)//  Checking if stone is placed in corner
     {
-
+        if ((rotation == '0' || rotation == '6'))
+        //Ausnahme für Nulldurchgang:
+        {
+            // Der Chip liegt auf Feld 0, 7 oder 6
+            if(getChip(orbit, '0') == getChip(orbit, '7') && getChip(orbit, '6') == getChip(orbit, '7'))
+            // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt.
+            {
+                return 1;
+            }
+        }
         if (getChip(orbit,rotation) == getChip(orbit, rotation + 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 2) && rotation != '6')
         //+dir Standardprüfung für Ecksteine
         {
@@ -68,10 +78,20 @@ int Board::checkMill(char orbit, char rotation)
             return 1;
         }
         // checking for tangential mill
-
-        if (getChip(orbit,rotation) == getChip(orbit, rotation - 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 1))
+        if (rotation == '7')
+        //Ausnahme für Nulldurchgang:
+        {
+            // Der Chip liegt auf Feld 0, 7 oder 6
+            if(getChip(orbit, '0') == getChip(orbit, '7') && getChip(orbit, '6') == getChip(orbit, '7'))
+            // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt.
+            {
+                return 1;
+            }
+        }
+        else if (getChip(orbit,rotation) == getChip(orbit, rotation - 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 1))
         // Mühle auf dem Rechteck
         {
+            cout << orbit << ", " << rotation << ", " << getChip(orbit,rotation) << "; " << orbit << ", " << rotation - 1 << ", "  << getChip(orbit, rotation - 1)  << "; " << orbit << ", " << rotation + 1 << ", " << getChip(orbit, rotation + 1) << endl ;
             // Farbe des neugestzten Steins ist gleich den auf den Nachbarfeldern auf dem jeweilligen Rechteck
             return 1;
         }
