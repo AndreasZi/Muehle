@@ -1,16 +1,19 @@
 #include <iostream>
 #include "Board.cpp"
+#include "Player.cpp"
 
 int main(){
+    Player black('B');
+    Player white('W');
     Board b;
 
     std::cout << "Mühlentest\n";
 
     
     std::cout<<"Standardfälle"<<endl;
-    b.setChip('A','0','W');
-    b.setChip('A','1','W');
-    b.setChip('A','2','W');
+    b.setChip('A','0',white);
+    b.setChip('A','1',white);
+    b.setChip('A','2',white);
     std::cout << "+dir Eckmühle: ";
     if (b.checkMill('A','0')==1){
         std::cout << "erkannt\n";
@@ -36,9 +39,9 @@ int main(){
     }
 
     b.emptyBoard();
-    b.setChip('A','1','W');
-    b.setChip('B','1','W');
-    b.setChip('C','1','W');
+    b.setChip('A','1',white);
+    b.setChip('B','1',white);
+    b.setChip('C','1',white);
     std::cout << "rad Mittenmühle: ";
     if (b.checkMill('A','1')==1 && b.checkMill('B','1')==1 && b.checkMill('C','1')==1){
         std::cout << "erkannt\n";
@@ -48,14 +51,31 @@ int main(){
     }
 
 
+    b.emptyBoard();
+    //b.setChip('A','0',black);
+    //b.setChip('A','6',white);
+    //b.setChip('B','0',black);
+    b.setChip('B','7',white);
+    b.setChip('B','6',white);
+    b.setChip('C','0',white);
+    //b.setChip('C','7',white);
+    
+    std::cout << "außname Nullfehler: ";
+    if (!b.checkMill('B','7')){
+        std::cout << "erkannt\n";
+    }
+    else{
+        std::cout << "fehler\n";
+    }
+
 
 
 
     b .emptyBoard();
     std::cout<<"Ausnahmefälle"<<endl;
-    b.setChip('A','0','W');
-    b.setChip('A','6','W');
-    b.setChip('A','7','W');
+    b.setChip('A','0',white);
+    b.setChip('A','6',white);
+    b.setChip('A','7',white);
     std::cout << "-exception Eckmühle: ";
     if (b.checkMill('A','0')==1){
         std::cout << "erkannt\n";
@@ -81,10 +101,10 @@ int main(){
 
     b .emptyBoard();
     std::cout<<"Ausnahmefall im Nulldurchgang"<<endl;
-    b.setChip('A','0','B');
-    b.setChip('A','6','W');
-    b.setChip('A','7','W');
-    b.setChip('B','0','W');
+    b.setChip('A','0',black);
+    b.setChip('A','6',white);
+    b.setChip('A','7',white);
+    b.setChip('B','0',white);
     std::cout << "+exception Eckmühle: ";
     if (!b.checkMill('A','6')){
         std::cout << "erkannt\n";

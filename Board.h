@@ -2,19 +2,21 @@
 #define HEADERFILE_H
 
 #include <iostream>
+#include "Player.h"
 using namespace std;
 
 
 class Board
 {
 private:
-    
+    Player empty;
+    Player cells[3][8]; // Zweidimensionales Array, welches die Werte 'O', 'W' und 'B' speichern soll.
 public:
-char cells[3][8]; // Zweidimensionales Array, welches die Werte 'O', 'W' und 'B' speichern soll.
+
     Board();
 
     
-    void setChip(char, char, char);
+    void setChip(char, char, Player);
     char getChip(char, char);
 
     void emptyBoard();
