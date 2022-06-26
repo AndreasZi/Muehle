@@ -51,7 +51,7 @@ void Board::emptyBoard()
 
 int Board::checkMill(char orbit, char rotation)
 {
-    if(getPlayer(orbit,rotation)=='O'){
+    if(getChip(orbit,rotation)=='O'){
         //Wenn das geprüfte Feld Leer ist, ist definitiv keine Mühle vorhanden :P
         return 0;
     }
