@@ -21,6 +21,8 @@ public:
     char getChip(char, char);
     Player* getPlayer(char, char);
 
+    char getEmptyColor();
+
     void emptyBoard();
     void printBoard();
     int checkMill(char, char);

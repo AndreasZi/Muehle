@@ -126,7 +126,7 @@ void startTurn(Player &player, Board &b)
             cin >> targetPosition; // erwartet wird ein String bestehend aus einem Buchstabe und einer Zahl
         } 
         // Position abfragen - ist das Feld frei?
-        while (b.getChip(targetPosition[0], targetPosition[1]) != 'O');
+        while (b.getChip(targetPosition[0], targetPosition[1]) != b.getEmptyColor());
 
         // Stein auf gewählte Position setzen
         b.setChip(targetPosition[0], targetPosition[1], player);
@@ -164,9 +164,9 @@ void startTurn(Player &player, Board &b)
            
         } 
         // Das Ursprungsfeld muss vom Spieler besetzt sein, das Zielfeld muss leer sein, das Zielfeld darf nur einen Schritt entfernt sein - andernfalls werden die obigen Schritte wiederholt
-        while (b.getChip(originPosition[0], originPosition[1]) != player.getColor()||b.getChip(targetPosition[0], targetPosition[1]) != 'O'||!neighbourCondition);
+        while (b.getChip(originPosition[0], originPosition[1]) != player.getColor()||b.getChip(targetPosition[0], targetPosition[1]) != b.getEmptyColor()||!neighbourCondition);
 
-        // Ursprungsposition zurücksetzen -> 'O'
+        // Ursprungsposition zurücksetzen -> b.getEmptyColor(
         b.deleteChip(originPosition[0], originPosition[1]);
 
         // Stein auf gewählte Position setzen
@@ -182,7 +182,7 @@ void startTurn(Player &player, Board &b)
         cin >> targetPosition;
         }
         // Wird wiederholt solange man keinen Gengerchip ausgewählt hat || der ausgewählte Gegnerchip einer geschlossenen Mühle angehört
-        while(b.getChip(targetPosition[0], targetPosition[1]) == player.getColor() || b.getChip(targetPosition[0], targetPosition[1]) == 'O'|| b.checkMill(targetPosition[0], targetPosition[1]));
+        while(b.getChip(targetPosition[0], targetPosition[1]) == player.getColor() || b.getChip(targetPosition[0], targetPosition[1]) == b.getEmptyColor()|| b.checkMill(targetPosition[0], targetPosition[1]));
 
         // Gegnerische LostChips werden erhöht
 

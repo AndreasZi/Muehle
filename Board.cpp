@@ -10,19 +10,21 @@ Board::Board(/* args */)
     emptyBoard();
 }
 
-
+char Board::getEmptyColor(){
+    return empty.getColor();
+}
 
 
 
 void Board::setChip(char orbit, char rotation, Player &player)
 {
-    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
+    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert player zu setzen.
     cells[int(orbit)-65][int(rotation)-48] = &player;
 }
 
 void Board::deleteChip(char orbit, char rotation)
 {
-    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert color (zb. 'W') zu setzen.
+    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert empty zu setzen.
     cells[int(orbit)-65][int(rotation)-48] = &empty;
 }
 
@@ -41,7 +43,7 @@ Player* Board::getPlayer(char orbit, char rotation)
 
 void Board::emptyBoard()
 {   
-    //Alle Felder mit Char 'O' zu füllen
+    //Alle Felder mit empty zu füllen
     Player **ptr = &cells[0][0]; //pointer um die Mehrdimensionalität zu überspringen
     for(int i = 0; i < 24; i++){
         *(ptr + i) = &empty;
@@ -51,7 +53,7 @@ void Board::emptyBoard()
 
 int Board::checkMill(char orbit, char rotation)
 {
-    if(getChip(orbit,rotation)=='O'){
+    if(getPlayer(orbit,rotation)==&empty){
         //Wenn das geprüfte Feld Leer ist, ist definitiv keine Mühle vorhanden :P
         return 0;
     }
