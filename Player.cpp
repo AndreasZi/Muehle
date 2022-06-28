@@ -55,6 +55,7 @@ void Bot::fillGMarray()
          orbit[0]++;
          cout << "rotation++: "<< rotation <<endl;
      }*/
+     cout << "Work In Progress" << endl;
 }
 void Bot::fillNeighbourArray()
 {

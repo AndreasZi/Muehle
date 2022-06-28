@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 using namespace std;
 
 
@@ -17,4 +18,5 @@ public:
     void printBoard();
     int checkMill(char, char);
     bool checkNeighbour(char, char, char, char);
+    std::list::list<string> getNeighbour(string);
 };

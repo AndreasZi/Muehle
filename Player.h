@@ -57,10 +57,10 @@ private:
     string neighbours[24][5] = {{"A0", "A1", "A7", "O", "O"},
                                 {"A1", "A0", "A2", "B1", "O"},
                                 {"A2", "A1", "A3", "O", "O"},
-                                {"A3"}}
+                                {"A3"}};
 
 public:
-    void fillGMarray(void);
+    void fillGMarray();
     void fillNeighbourArray(void);
 
     // SCHNITSTELLE MAIN-BOT NOCH UNKLAR
