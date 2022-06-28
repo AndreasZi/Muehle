@@ -1,3 +1,6 @@
+#ifndef PLAYERH
+#define PLAYERH
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -12,6 +15,7 @@ private:
 public:
     string name;
     // Constructors
+    Player();
     Player(char);
     Player(string, char);
     // Functions
@@ -77,3 +81,5 @@ public:
         fillNeighbourArray();
     }
 };
+
+#endif

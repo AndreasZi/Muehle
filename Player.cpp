@@ -1,5 +1,7 @@
 #include "Player.h"
+Player::Player(){
 
+}
 Player::Player(char COLOR)
 {
     unusedChips = 9;
@@ -10,7 +12,7 @@ Player::Player(char COLOR)
 Player::Player(string NAME, char COLOR)
 {
     unusedChips = 9;
-    lostChips = 0;
+    lostChips = 4;
     color = COLOR;
     setName(NAME);
 }
@@ -19,6 +21,7 @@ void Player::startTurn()
 }
 void Player::loseChip()
 {
+    lostChips++;
 }
 void Player::setName(string NAME)
 {
@@ -31,6 +34,10 @@ int Player::getLostChips()
 char Player::getColor()
 {
     return color;
+}
+void Player::setColor(char COLOR)
+{
+    color = COLOR;
 }
 int Player::getUnusedChips()
 {
@@ -55,7 +62,6 @@ void Bot::fillGMarray()
          orbit[0]++;
          cout << "rotation++: "<< rotation <<endl;
      }*/
-     cout << "Work In Progress" << endl;
 }
 void Bot::fillNeighbourArray()
 {
