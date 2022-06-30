@@ -11,6 +11,7 @@ Board::Board(/* args */)
 }
 
 char Board::getEmptyColor(){
+    //Der für leere Felder gewählte Char wird zurückgegeben
     return empty.getColor();
 }
 
@@ -18,13 +19,13 @@ char Board::getEmptyColor(){
 
 void Board::setChip(char orbit, char rotation, Player &player)
 {
-    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert player zu setzen.
+    // Setter, um einem Spielfeld einen Spieler-Pointer zuzuweisen.
     cells[int(orbit)-65][int(rotation)-48] = &player;
 }
 
 void Board::deleteChip(char orbit, char rotation)
 {
-    // Setter, um den Wert des Arrays cells an der Stelle coordinate (zb. "A0") auf den Wert empty zu setzen.
+    //Feld Leeren.
     cells[int(orbit)-65][int(rotation)-48] = &empty;
 }
 
@@ -37,15 +38,18 @@ char Board::getChip(char orbit, char rotation)
 
 Player* Board::getPlayer(char orbit, char rotation)
 {
-    // Getter, der den Wert des Arrays cells an der Stelle coordinate (zb. "A0") zu returnt.
+    // Getter, der einen Pointer für den Spieler des gewählten Feldes zurückgibt.
     return cells[int(orbit)-65][int(rotation)-48];
 }
 
 void Board::emptyBoard()
 {   
     //Alle Felder mit empty zu füllen
-    Player **ptr = &cells[0][0]; //pointer um die Mehrdimensionalität zu überspringen
+    Player **ptr = &cells[0][0]; //pointer um die Mehrdimensionalität des Arrays zu überspringen
     for(int i = 0; i < 24; i++){
+        //Wird für alle 24 Felder ausgeführt
+        
+        //Feld wird gelehrt.
         *(ptr + i) = &empty;
     } 
 }
@@ -53,14 +57,48 @@ void Board::emptyBoard()
 
 int Board::checkMill(char orbit, char rotation)
 {
+    /* 
+    A0------------A1-----------A2
+    |             |            |
+    |    B0-------B1------B2   |
+    |    |        |       |    |
+    |    |   C0---C1-- C2 |    |
+    |    |   |         |  |    |
+    A7---B7--C7        C3-B3---A3
+    |    |   |         |  |    |
+    |    |   C6---C5-- C4 |    |
+    |    |        |       |    |
+    |    B6-------B5------B4   |
+    |             |            |
+    A6------------A5-----------A4 
+
+    Koordinaten orbit ∈ [A,B,C], rotation ∈ [0,1,2,3,4,5,6,7]
+
+    Theorie:
+
+    Jedes Feld kann potentiell zwei Mühlen bilden:
+    
+    Wenn rotation eine gerade Zahl ist, befindet sich der Stein auf einer Ecke, 
+    mögliche Mühlen würden Gebildet, wenn Steine auf gleichem orbit einen mit 
+    rotation +1 und +2 bzw. -1 und -2 gleichfarbig sind.
+
+    Wenn rotation eine ungerade Zahl ist, ist der Stein auf einem der vier Mittenstege.
+    Die erste Mühle bildet sich aus den Positionen mit gleicher rotation und orbit A, B und C
+    Die zweite Mühle ist bei gleichbleibendem Orbit: rotation +1 und -1
+
+    Ausnahmen müssen gemacht werden wenn von 0 nach 7 oder 7 nach 0 geprüft wird.
+    */
+
     if(getPlayer(orbit,rotation)==&empty){
         //Wenn das geprüfte Feld Leer ist, ist definitiv keine Mühle vorhanden :P
         return 0;
     }
 
     // Coordinates from A0 to C7/    
-    if (int(rotation) % 2 == 0)//  Checking if stone is placed in corner
+    if (int(rotation) % 2 == 0)
     {
+        //Feld ist in einer Ecke
+
         if ((rotation == '0' || rotation == '6'))
         //Ausnahme für Nulldurchgang:
         {
@@ -71,6 +109,7 @@ int Board::checkMill(char orbit, char rotation)
                 return 1;
             }
         }
+
         if (getChip(orbit,rotation) == getChip(orbit, rotation + 1) && getChip(orbit,rotation) == getChip(orbit, rotation + 2) && rotation != '6')
         //+dir Standardprüfung für Ecksteine
         {
@@ -96,13 +135,13 @@ int Board::checkMill(char orbit, char rotation)
             return 1;
         }
         // checking for tangential mill
+
         if (rotation == '7')
         //Ausnahme für Nulldurchgang:
         {
-            // Der Chip liegt auf Feld 0, 7 oder 6
             if(getChip(orbit, '0') == getChip(orbit, '7') && getChip(orbit, '6') == getChip(orbit, '7'))
-            // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt.
             {
+                // Die Position 7 bildet eine Mühle mit den Feldern 6 und 0 auf dem Selben Quadrat
                 return 1;
             }
         }
@@ -114,42 +153,31 @@ int Board::checkMill(char orbit, char rotation)
         }
     }
 
-    
-    if ((rotation == '0' || rotation == '7'|| rotation == '6'))
-    //Ausnahme für Nulldurchgang:
-    {
-        // Der Chip liegt auf Feld 0, 7 oder 6
-        if(getChip(orbit, '0') == getChip(orbit, '7') && getChip(orbit, '6') == getChip(orbit, '7'))
-        // 0, 7 und 6 sind von gleichfarbigen Steinen besetzt.
-        {
-            return 1;
-        }
-    }
     return 0;
 }
 
 bool Board::checkNeighbour(char orbitOrigin, char rotationOrigin, char orbitTarget, char rotationTarget)
 {
-    // Checking for same orbit (A == A?)
-    if (orbitOrigin == orbitTarget)
+
+    if (orbitOrigin == orbitTarget && (abs(rotationOrigin - rotationTarget) == 1 || abs(rotationOrigin - rotationTarget) == 7))
     {
-        // AX-AY ==1 DISTANZ
-        if (abs(rotationOrigin - rotationTarget) == 1 || abs(rotationOrigin - rotationTarget) == 7)
-        {
-            // Die Distanz zwischen den Beiden Punkten hat den Betrag 1 oder 7 (0-7 oder 7-0)
-            // EXCEPTION für Ecksteine FOR X0 & X7
-            return true;
-            
-        }
+        /* 
+        Die verglichenen Felder befinden sich auf dem gleichen Quadrat
+        Die Distanz zwischen den Beiden Punkten hat den Betrag 1
+        Der Betrag 7 kann nur bei Nachbarn 0-7 oder 7-0 zutreffen und deckt somit die Ausnahme für Nulldurchgang ab
+        */
+
+        
+        return true;
     }
-    else if (rotationOrigin == rotationTarget && rotationOrigin%2 != 0)
+    else if (rotationOrigin%2 != 0 && rotationOrigin == rotationTarget && abs(orbitOrigin - orbitTarget) == 1)
     {
-        // Cases: AB BC  BA CB
-        if (abs(orbitOrigin - orbitTarget) == 1)
-        {
-            // Die Distanz zwischen den Beiden Punkten hat den Betrag 1
-            return true;
-        }
+        /* 
+        Die verglichenen Felder sind mittelsteine
+        Beide Felder sind auf dem gleichen Steg ("X1", "X3", "X5" oder "X7")
+        Die Distanz zwischen den Beiden Punkten hat den Betrag 1 (alles außer A nach C)
+        */
+        return true;
     }
     return false;
 }
