@@ -8,12 +8,13 @@ using namespace std;
 class Player
 {
 private:
+    
+
+public:
     int unusedChips;
     int lostChips;
     char color;
-
-public:
-    static bool isBot;
+    bool isBot;
     string name;
     // Constructors
     Player();
@@ -39,8 +40,10 @@ public:
 class Bot : public Player
 {
 private:
+   // int unusedChips;
+    // int lostChips;
     // string globalMills[16][3];
-    string globalMills[16][3] = {{"A0", "A1", "A2"},
+    /*string globalMills[16][3] = {{"A0", "A1", "A2"},
                                  {"A2", "A3", "A4"},
                                  {"A4", "A5", "A6"},
                                  {"A6", "A7", "A0"},
@@ -58,7 +61,7 @@ private:
                                  {"A7", "B7", "C7"},
                                  };
 
-    string neighbours[24][4];
+    string neighbours[24][4];*/
     /*string neighbours[3][8][4] = {{"A1", "A7", "O", "O"},
                                 {"A0", "A2", "B1", "O"},
                                 {"A1", "A3", "O", "O"},

@@ -1,6 +1,6 @@
 #include "Player.h"
-Player::Player(){
-
+Player::Player()
+{
 }
 Player::Player(char COLOR)
 {
@@ -8,7 +8,7 @@ Player::Player(char COLOR)
     lostChips = 0;
     color = COLOR;
     setName("unknown Player");
-   // isBot = false;
+    isBot = false;
 }
 Player::Player(string NAME, char COLOR)
 {
@@ -16,7 +16,7 @@ Player::Player(string NAME, char COLOR)
     lostChips = 4;
     color = COLOR;
     setName(NAME);
-   // isBot = false;
+    isBot = false;
 }
 void Player::startTurn()
 {
@@ -51,10 +51,12 @@ void Player::decrementUnusedChip()
 }
 
 // THIS IS WHERE BOT TERRITORY STARTS, MF------------------------------------------------------------
-Bot::Bot (char color){
-    //isBot = true;
+Bot::Bot(char color)
+{
+    isBot = true;
     setColor(color);
-
+    unusedChips = 9;
+    lostChips = 0;
 }
 /*void Bot::fillGMarray()
 {
@@ -75,11 +77,11 @@ void Bot::fillNeighbourArray()
 string Bot::genereateChipPlacement()
 {
     return "Work In Progress";
-    //Mühlen Scannen
-        //getColor(Array)
-    //Wenn 2 Felder von mir + 1 Frei -> auf Frei setzen
-    //Wenn 2 Felder von Gegner + 1 Frei -> auf Frei setzen
-    //Randome freie Position suchen und setzen
+    // Mühlen Scannen
+    // getColor(Array)
+    // Wenn 2 Felder von mir + 1 Frei -> auf Frei setzen
+    // Wenn 2 Felder von Gegner + 1 Frei -> auf Frei setzen
+    // Randome freie Position suchen und setzen
 }
 string Bot::genereateChipMovement()
 {
@@ -89,6 +91,7 @@ string Bot::generateRemoveChipPosition()
 {
     return "Work In Progress";
 }
-void Bot::printTest(){
-    cout<<"Sie haben den Bot erfolgreich AKTIVIERT" << endl;
+void Bot::printTest()
+{
+    cout << "Sie haben den Bot erfolgreich AKTIVIERT" << endl;
 }

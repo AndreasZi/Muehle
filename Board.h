@@ -32,6 +32,11 @@ public:
     bool checkNeighbour(char, char, char, char);
     tuple<string, string, string, string> getNeighbours(string);
     void printNeighbours(string);
-    void ScheissFuckingTestFunktion();
+
+    //BOT Funktionen
+    string generateChipPlacement();
+    tuple<string, string> generateChipMovement(char);
+    string generateChipDeletion(char);
+
 };
 #endif
