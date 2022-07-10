@@ -13,12 +13,13 @@ private:
     char color;
 
 public:
+    static bool isBot;
     string name;
     // Constructors
     Player();
     Player(char);
     Player(string, char);
-    // Functions
+    // Functions ----------------
     void startTurn();
     // UNUSED CHIPS
     int getUnusedChips();
@@ -57,15 +58,17 @@ private:
                                  {"A7", "B7", "C7"},
                                  };
 
-    //string neighbours[24][4];
-    string neighbours[24][5] = {{"A0", "A1", "A7", "O", "O"},
-                                {"A1", "A0", "A2", "B1", "O"},
-                                {"A2", "A1", "A3", "O", "O"},
-                                {"A3"}};
+    string neighbours[24][4];
+    /*string neighbours[3][8][4] = {{"A1", "A7", "O", "O"},
+                                {"A0", "A2", "B1", "O"},
+                                {"A1", "A3", "O", "O"},
+                                {"A2", "A4", "B3", "O"},
+                                {}
+                                };*/
 
 public:
-    void fillGMarray();
-    void fillNeighbourArray(void);
+    //void fillGMarray();
+    //void fillNeighbourArray(void);
 
     // SCHNITSTELLE MAIN-BOT NOCH UNKLAR
     string genereateChipPlacement();
@@ -74,12 +77,8 @@ public:
 
     void printTest();
 
-    Bot(char COLOR) : Player(COLOR)
-    {
-        setName("Bot");
-        fillGMarray();
-        fillNeighbourArray();
-    }
+    //Bot(char COLOR) : Player(COLOR);
+    Bot(char);
 };
 
 #endif

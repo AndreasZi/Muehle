@@ -8,6 +8,7 @@ Player::Player(char COLOR)
     lostChips = 0;
     color = COLOR;
     setName("unknown Player");
+   // isBot = false;
 }
 Player::Player(string NAME, char COLOR)
 {
@@ -15,6 +16,7 @@ Player::Player(string NAME, char COLOR)
     lostChips = 4;
     color = COLOR;
     setName(NAME);
+   // isBot = false;
 }
 void Player::startTurn()
 {
@@ -49,8 +51,12 @@ void Player::decrementUnusedChip()
 }
 
 // THIS IS WHERE BOT TERRITORY STARTS, MF------------------------------------------------------------
+Bot::Bot (char color){
+    //isBot = true;
+    setColor(color);
 
-void Bot::fillGMarray()
+}
+/*void Bot::fillGMarray()
 {
     /* char orbit = A;
      int rotation = 0;
@@ -61,14 +67,19 @@ void Bot::fillGMarray()
          cout << "rotation vor Inkrement: "<< rotation <<endl;
          orbit[0]++;
          cout << "rotation++: "<< rotation <<endl;
-     }*/
+     }
 }
 void Bot::fillNeighbourArray()
 {
-}
+}*/
 string Bot::genereateChipPlacement()
 {
     return "Work In Progress";
+    //Mühlen Scannen
+        //getColor(Array)
+    //Wenn 2 Felder von mir + 1 Frei -> auf Frei setzen
+    //Wenn 2 Felder von Gegner + 1 Frei -> auf Frei setzen
+    //Randome freie Position suchen und setzen
 }
 string Bot::genereateChipMovement()
 {

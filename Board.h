@@ -2,7 +2,8 @@
 #define HEADERFILE_H
 
 #include <iostream>
-#include <list>
+#include <vector>
+#include <tuple>
 #include "Player.h"
 using namespace std;
 
@@ -16,6 +17,7 @@ public:
 
     Board();
 
+    string Neighbours[4];
     
     void setChip(char, char, Player&);
     void deleteChip(char, char);
@@ -28,5 +30,8 @@ public:
     void printBoard();
     int checkMill(char, char);
     bool checkNeighbour(char, char, char, char);
-    std::list::list<string> getNeighbour(string);
+    tuple<string, string, string, string> getNeighbours(string);
+    void printNeighbours(string);
+    void ScheissFuckingTestFunktion();
 };
+#endif
