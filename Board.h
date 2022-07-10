@@ -2,6 +2,8 @@
 #define HEADERFILE_H
 
 #include <iostream>
+#include <vector>
+#include <tuple>
 #include "Player.h"
 using namespace std;
 
@@ -15,6 +17,7 @@ public:
 
     Board();
 
+    string Neighbours[4];
     
     void setChip(char, char, Player&);
     void deleteChip(char, char);
@@ -27,7 +30,13 @@ public:
     void printBoard();
     int checkMill(char, char);
     bool checkNeighbour(char, char, char, char);
+    tuple<string, string, string, string> getNeighbours(string);
+    void printNeighbours(string);
+
+    //BOT Funktionen
+    string generateChipPlacement();
+    tuple<string, string> generateChipMovement(char);
+    string generateChipDeletion(char);
+
 };
-
-
 #endif

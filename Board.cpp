@@ -181,7 +181,187 @@ bool Board::checkNeighbour(char orbitOrigin, char rotationOrigin, char orbitTarg
     }
     return false;
 }
+string Board::generateChipPlacement()
+{
+    char currentOrdbit = 'A';
+    string placementPosition = "C6";
+    // ERSTE FREIE POSITION WIRD VON BOT BESETZT
+    for (int i = 0; i < 3; i++)
+    {
 
+        for (char j = '0'; j <= '7'; j++)
+        {
+
+            if (getChip(currentOrdbit, j) == getEmptyColor())
+            {
+                placementPosition = string({currentOrdbit, j});
+                goto label;
+            }
+        }
+
+        if (i == 1)
+        {
+            currentOrdbit = 'B';
+        }
+        else if (i == 2)
+        {
+            currentOrdbit = 'C';
+        }
+    }
+label:
+    return placementPosition;
+}
+
+tuple<string, string> Board::generateChipMovement(char activePlayerColor)
+{
+    char currentOrdbit = 'A';
+    char currentNeighbourOrbit;
+    string origin;
+    string target;
+
+    // Gesamtes Feld von A0 bis C7 durchscannen nach eigenen Chips
+    for (int i = 0; i < 3; i++)
+    {
+
+        for (char j = '0'; j < '7'; j++)
+        {
+            // Prüfen, wo weisse Steine liegen
+            if (getChip(currentOrdbit, j) == activePlayerColor)
+            {
+
+                // Gesamtes Feld von A0 bis C7 durchscannen nach leeren Nachbarfeldern
+                for (int k = 0; k < 3; k++)
+                {
+                    for (char l = '0'; l < '7'; l++)
+                    {
+
+                        // Prüfen, ob Zelle frei ist
+                        if (getChip(currentNeighbourOrbit, l) == getEmptyColor())
+                        {
+                            // Prüfen, ob Zelle ein Nachbar zu Origin ist.
+                            if (checkNeighbour(currentOrdbit, j, currentNeighbourOrbit, l))
+                            {
+                                target = string(currentNeighbourOrbit, l);
+                                goto label3;
+                            }
+                        }
+                    }
+                    if (k == 1)
+                    {
+                        currentNeighbourOrbit = 'B';
+                    }
+                    else if (k == 2)
+                    {
+                        currentNeighbourOrbit = 'C';
+                    }
+                }
+
+            label3:
+                origin = string({currentOrdbit, j});
+                goto label2;
+            }
+        }
+        if (i == 1)
+        {
+            currentOrdbit = 'B';
+        }
+        else if (i == 2)
+        {
+            currentOrdbit = 'C';
+        }
+    }
+
+label2:
+    return make_tuple(origin, target);
+}
+
+string Board::generateChipDeletion(char enemyPlayerColor)
+{
+    char currentOrdbit = 'A';
+    string deletionPosition;
+
+    for (int i = 0; i < 3; i++)
+    {
+
+        for (char j = '0'; j < '7'; j++)
+        {
+
+            if (getChip(currentOrdbit, j) == enemyPlayerColor)
+            {
+                deletionPosition = string({currentOrdbit, j});
+                goto label1;
+            }
+        }
+        if (i == 1)
+        {
+            currentOrdbit = 'B';
+        }
+        else if (i == 2)
+        {
+            currentOrdbit = 'C';
+        }
+    }
+label1:
+    return deletionPosition;
+}
+
+tuple<string, string, string, string> Board::getNeighbours(string origin)
+{
+    // Möglich sind 2, 3 ODER 4 Neighbours
+
+    // FUNKTIONIER NICHT WEGEN BERECHNUNGSFEHLER VON string origin!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! =(
+
+    string n0;
+    string n1;
+    string n2;
+    string n3;
+
+    if (int(origin[1]) % 2 == 0) //  Checking if origin is in CORNER
+    {
+        if (origin[1] == 0) //  Checking if origin is at X0
+        {
+            n0 = string(origin[0], origin[1]++);
+            n1 = string(origin[0], '7');
+            n2 = "O";
+            n3 = "O";
+        }
+        else
+        {
+            n0 = string(origin[0], origin[1]++);
+            n1 = string(origin[0], origin[1]--);
+            n2 = "O";
+            n3 = "O";
+        }
+    }
+    else if (origin[0] == 'A') // NOT IN CORNER && IN ORBIT A
+    {
+        // NEIGHBOURS ON SAME ORBIT
+        n0 = string(origin[0], origin[1]++);
+        n1 = string(origin[0], origin[1]--);
+        n2 = string(origin[0]++, origin[1]);
+        n3 = "O";
+    }
+    else if (origin[0] == 'B') //   NOT IN CORNER && IN ORBIT B
+    {
+        // NEIGHBOURS ON SAME ORBIT
+        n0 = string(origin[0], origin[1]++);
+        n1 = string(origin[0], origin[1]--);
+        // NEIGHBOURS ON SAME ROTATION
+        n2 = string(origin[0]++, origin[1]);
+        n3 = string(origin[0]--, origin[1]);
+    }
+    else // NOT IN CORNER && IN ORBIT C
+    {
+        // NEIGHBOURS ON SAME ORBIT
+        n0 = string(origin[0], origin[1]++);
+        n1 = string(origin[0], origin[1]--);
+        n2 = string(origin[0]--, origin[1]);
+        n3 = "O";
+    }
+
+    // return make_tuple(n0, n1, n2, n3);
+    return make_tuple(string(n0), string(n1), string(n2), string(n3));
+}
 
 void Board::printBoard(){
     //Ausgabe des Mühlefelds in der Console
