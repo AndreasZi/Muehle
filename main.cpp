@@ -11,7 +11,7 @@ Anforderungen die HART sind:
 • Kommentare müssen vorhanden sein
 • Dokumentation
 */
-
+//unschuldiger Testcommentar
 #include <iostream>
 #include "Board.cpp"
 #include "Player.cpp"
