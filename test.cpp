@@ -1,3 +1,5 @@
+//Dieses Programm testet, ob die Mühlenlogik funktioniert
+
 #include <iostream>
 #include "Board.cpp"
 #include "Player.cpp"
