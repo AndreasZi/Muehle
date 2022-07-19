@@ -261,6 +261,7 @@ tuple<string, string> Board::generateChipMovement(char activePlayerColor)
                 goto label2;
             }
         }
+        //Orbitkoordinate setzen
         if (i == 1)
         {
             currentOrdbit = 'B';
@@ -279,19 +280,21 @@ string Board::generateChipDeletion(char enemyPlayerColor)
 {
     char currentOrdbit = 'A';
     string deletionPosition;
-
+    //Gesamtes Feld von A0 bis C7 durchlaufen
+    //Orbits durchlaufen
     for (int i = 0; i < 3; i++)
     {
-
+        //Rotation durchlaufen
         for (char j = '0'; j < '7'; j++)
         {
-
+            //Koordinate von gegnerischem Stein erfassen und zurückgeben
             if (getChip(currentOrdbit, j) == enemyPlayerColor)
             {
                 deletionPosition = string({currentOrdbit, j});
                 goto label1;
             }
         }
+        //Orbitkoordinate setzen
         if (i == 1)
         {
             currentOrdbit = 'B';

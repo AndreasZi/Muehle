@@ -1,3 +1,9 @@
+/*Aufgrund von der Umstellung in unserer Architektur, während des Projekts,
+wird diese Datei nicht mehr verwendet.
+
+Auch komisch dass in der headerdatei logik programmiert wurde... hmmmm....
+*/
+
 #include <iostream>
 using namespace std;
 

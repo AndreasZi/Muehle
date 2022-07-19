@@ -9,7 +9,7 @@ class Player
 {
 private:
     
-
+    //leider funktioniert das spiel nicht, wenn bestimmte variablen private sind
 public:
     int unusedChips;
     int lostChips;
@@ -40,6 +40,10 @@ public:
 class Bot : public Player
 {
 private:
+   
+   //Diese Arrays werden leider nicht verwendet, mehr dazu in der Dokumentation.
+   //Diese Arrays wären der Grundbaustein für unsere Bot-Logik gewesen.
+   
    // int unusedChips;
     // int lostChips;
     // string globalMills[16][3];
