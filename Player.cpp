@@ -60,6 +60,10 @@ Bot::Bot(char color)
 }
 /*void Bot::fillGMarray()
 {
+    //Leider wurde die anspruchsvollere Bot-Logik nicht fertig
+
+    //Hier wollte ich mein Array dynamisch befüllen
+    
     /* char orbit = A;
      int rotation = 0;
      for(int i = 0; i<16; i++){

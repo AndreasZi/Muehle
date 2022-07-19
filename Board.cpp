@@ -185,13 +185,15 @@ string Board::generateChipPlacement()
 {
     char currentOrdbit = 'A';
     string placementPosition = "C6";
-    // ERSTE FREIE POSITION WIRD VON BOT BESETZT
+    
+    
+    //Orbits durchlaufen
     for (int i = 0; i < 3; i++)
     {
-
+        //Rotation durchlaufen
         for (char j = '0'; j <= '7'; j++)
         {
-
+            // ERSTE FREIE POSITION WIRD VON BOT BESETZT
             if (getChip(currentOrdbit, j) == getEmptyColor())
             {
                 placementPosition = string({currentOrdbit, j});
@@ -199,6 +201,7 @@ string Board::generateChipPlacement()
             }
         }
 
+        //Orbitkoordinaten setzen
         if (i == 1)
         {
             currentOrdbit = 'B';
